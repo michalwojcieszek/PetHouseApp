@@ -1,7 +1,7 @@
 "use client";
 
 import { IoCloseCircleOutline, IoLogoGoogle } from "react-icons/io5";
-import Button from "./Button";
+import Button from "../Button";
 import { ComponentPropsWithRef, FormEvent, ReactNode } from "react";
 
 type BoxProps = {
