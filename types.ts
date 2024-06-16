@@ -1,3 +1,10 @@
+type Pet = {
+  type: String;
+  accept: Boolean;
+  capacity: Number;
+  price: Number;
+};
+
 export type PropertyType = {
   _id: string;
   owner: string;
@@ -13,34 +20,8 @@ export type PropertyType = {
       lat: string;
       lng: string;
     };
-    pets: {
-      dog: {
-        accept: boolean;
-        capacity: number;
-        price?: number;
-      };
-      cat: {
-        accept: boolean;
-        capacity: number;
-        price?: number;
-      };
-      parrot: {
-        accept: boolean;
-        capacity: number;
-        price?: number;
-      };
-      hamster: {
-        accept: boolean;
-        capacity: number;
-        price?: number;
-      };
-      snake: {
-        accept: boolean;
-        capacity: number;
-        price?: number;
-      };
-    };
   };
+  pets: Pet[];
   createdAt: Date;
   updatedAt: Date;
 };

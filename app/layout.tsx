@@ -19,7 +19,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           <Navbar />
           <RegisterBox />
           <LoginBox />
-          <div className="pb-20 pt-28">{children}</div>
+          <div className="pb-2 pt-10">{children}</div>
         </ClientProvider>
       </body>
     </html>

@@ -43,8 +43,13 @@ const PropertySchema = new Schema(
           required: true,
         },
       },
-      pets: {
-        dog: {
+      pets: [
+        {
+          type: {
+            type: String,
+            enum: ["dog", "cat", "parrot", "hamster", "snake"],
+            required: true,
+          },
           accept: {
             type: Boolean,
             required: true,
@@ -55,61 +60,10 @@ const PropertySchema = new Schema(
           },
           price: {
             type: Number,
+            required: true,
           },
         },
-        cat: {
-          accept: {
-            type: Boolean,
-            required: true,
-          },
-          capacity: {
-            type: Number,
-            required: true,
-          },
-          price: {
-            type: Number,
-          },
-        },
-        parrot: {
-          accept: {
-            type: Boolean,
-            required: true,
-          },
-          capacity: {
-            type: Number,
-            required: true,
-          },
-          price: {
-            type: Number,
-          },
-        },
-        hamster: {
-          accept: {
-            type: Boolean,
-            required: true,
-          },
-          capacity: {
-            type: Number,
-            required: true,
-          },
-          price: {
-            type: Number,
-          },
-        },
-        snake: {
-          accept: {
-            type: Boolean,
-            required: true,
-          },
-          capacity: {
-            type: Number,
-            required: true,
-          },
-          price: {
-            type: Number,
-          },
-        },
-      },
+      ],
     },
   },
   {
