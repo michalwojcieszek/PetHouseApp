@@ -1,15 +1,13 @@
 import connectDB from "@/config/database";
 import Property from "@/models/Property";
-import Container from "@/components/Container";
 import ClientProvider from "@/components/ClientProvider";
-import PropertyCard from "@/components/PropertyCard";
-import { convertToSerializeableObject } from "@/utils/convertToObjects";
-import { PropertyType } from "@/types";
+import PropertyGrid from "@/components/PropertyGrid";
 
 const HomePage = async () => {
   await connectDB();
-  const propertiesQuery = await Property.find({}).lean();
-  const properties = convertToSerializeableObject(propertiesQuery);
+  const propertiesNotJSON = await Property.find({});
+  //fixing error 'Only plain objects can be passed to Client Components from Server Components'
+  const properties = JSON.parse(JSON.stringify(propertiesNotJSON));
 
   if (!properties || properties.length === 0)
     return (
@@ -20,16 +18,10 @@ const HomePage = async () => {
 
   return (
     <ClientProvider>
-      <Container>
-        {
-          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-            {properties.map((property: PropertyType) => (
-              <PropertyCard key={property._id} property={property} />
-            ))}
-          </ul>
-        }
-      </Container>
-      ;
+      <div className="flex flex-col gap-3 py-4">
+        <h2 className="text-xl font-semibold">Properties available:</h2>
+        <PropertyGrid properties={properties} />
+      </div>
     </ClientProvider>
   );
 };

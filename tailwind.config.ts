@@ -18,6 +18,9 @@ const config: Config = {
         "grey-main": "#495057",
         "grey-secondary": "#868e96",
       },
+      gridTemplateColumns: {
+        "30/70": "30% 70%",
+      },
     },
   },
   plugins: [],

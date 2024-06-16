@@ -4,9 +4,8 @@ import Image from "next/image";
 import logo from "@/public/images/logo.png";
 import placeholder from "@/public/images/placeholder.jpg";
 import { useRouter } from "next/navigation";
-import SearchBox from "./SearchBox";
+// import SearchBox from "./SearchBox";
 import Container from "../Container";
-import useRegister from "@/hooks/useRegister";
 import DropdownMenu from "./DropdownMenu";
 
 const Navbar = () => {
@@ -14,16 +13,13 @@ const Navbar = () => {
 
   return (
     // <div className="bg-theme-color py-5 px-5">
-    <div className="py-5 border-b-[1px]">
+    <div className="py-3 bg-theme-color">
       <Container>
         <div className="flex flex-row items-center justify-between gap-2">
-          <div
-            className="hidden md:block cursor-pointer"
-            onClick={() => router.push("/")}
-          >
+          <div className="cursor-pointer" onClick={() => router.push("/")}>
             <Image src={logo} alt="PetHouse logo" width={200} height={100} />
           </div>
-          <SearchBox />
+          {/* <SearchBox /> */}
           <div className="flex flex-row items-center justify-between gap-1 md:gap-2 text-4xl text-grey-main">
             <div className="cursor-pointer" onClick={() => {}}>
               <Image
@@ -34,7 +30,7 @@ const Navbar = () => {
                 className="rounded-full"
               />
             </div>
-            <div className="cursor-pointer p-2 rounded-md text-theme-color text-3xl">
+            <div className="cursor-pointer p-2 rounded-md text-white text-5xl">
               <DropdownMenu />
             </div>
           </div>

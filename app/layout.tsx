@@ -4,6 +4,8 @@ import "./globals.css";
 import RegisterBox from "@/components/box/RegisterBox";
 import LoginBox from "@/components/box/LoginBox";
 import ClientProvider from "@/components/ClientProvider";
+import Sidebar from "@/components/sidebar/Sidebar";
+import Container from "@/components/Container";
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -17,9 +19,14 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       <body className={font.className}>
         <ClientProvider>
           <Navbar />
+          <Container>
+            <div className="pb-2 pt-10 grid grid-cols-1 lg:grid-cols-30/70 gap-8">
+              <Sidebar />
+              <div>{children}</div>
+            </div>
+          </Container>
           <RegisterBox />
           <LoginBox />
-          <div className="pb-2 pt-10">{children}</div>
         </ClientProvider>
       </body>
     </html>

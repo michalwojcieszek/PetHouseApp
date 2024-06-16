@@ -1,8 +1,8 @@
 type Pet = {
-  type: String;
-  accept: Boolean;
-  capacity: Number;
-  price: Number;
+  type: string;
+  accept: boolean;
+  capacity: number;
+  price: number;
 };
 
 export type PropertyType = {
