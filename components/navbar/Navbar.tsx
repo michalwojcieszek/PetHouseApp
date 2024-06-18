@@ -7,8 +7,10 @@ import { useRouter } from "next/navigation";
 // import SearchBox from "./SearchBox";
 import Container from "../Container";
 import DropdownMenu from "./DropdownMenu";
+import { CurrentUserType } from "@/types";
 
-const Navbar = () => {
+const Navbar = ({ currentUser }: { currentUser: CurrentUserType }) => {
+  const isLoggedIn = currentUser ? true : false;
   const router = useRouter();
 
   return (
@@ -23,15 +25,15 @@ const Navbar = () => {
           <div className="flex flex-row items-center justify-between gap-1 md:gap-2 text-4xl text-grey-main">
             <div className="cursor-pointer" onClick={() => {}}>
               <Image
-                src={placeholder}
+                src={currentUser?.image || placeholder}
                 alt="PetHouse logo"
-                width={40}
-                height={40}
+                width={30}
+                height={30}
                 className="rounded-full"
               />
             </div>
-            <div className="cursor-pointer p-2 rounded-md text-white text-5xl">
-              <DropdownMenu />
+            <div className="cursor-pointer p-2 rounded-md text-white text-3xl">
+              <DropdownMenu isLoggedIn={isLoggedIn} />
             </div>
           </div>
         </div>

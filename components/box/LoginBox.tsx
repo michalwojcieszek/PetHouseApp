@@ -5,10 +5,17 @@ import Box from "./Box";
 import Input from "./Input";
 import useRegister from "@/hooks/useRegister";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import loginAuth from "@/app/actions/loginAuth";
 
 const LoginBox = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { isOpen, close } = useLogin();
   const { open: openRegister } = useRegister();
+  const router = useRouter();
 
   const {
     register,
@@ -19,8 +26,21 @@ const LoginBox = () => {
     defaultValues: { email: "", password: "" },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = async (inputs) => {
+    await loginAuth(inputs, setIsLoading);
+    console.log("2");
+    close();
+    // setIsLoading(true);
+    // signIn("credentials", { ...inputs, redirect: false }).then((callback) => {
+    //   setIsLoading(false);
+    //   if (callback?.ok) {
+    //     toast.success("Logged in");
+    //     close();
+    //   }
+    //   if (callback?.error) {
+    //     toast.error(callback.error);
+    //   }
+    // });
   };
 
   const email = watch("email");
@@ -37,6 +57,7 @@ const LoginBox = () => {
       isOpen={isOpen}
       alternativeOpen={openRegister}
       onSubmit={handleSubmit(onSubmit)}
+      isLoading={isLoading}
     >
       <Input
         id="email"
@@ -45,6 +66,7 @@ const LoginBox = () => {
         register={register}
         errors={errors}
         validation={{ required: "Email is required" }}
+        disabled={isLoading}
         value={email}
       />
       <Input
@@ -54,6 +76,7 @@ const LoginBox = () => {
         register={register}
         errors={errors}
         validation={{ required: "Password is required" }}
+        disabled={isLoading}
         value={password}
       />
     </Box>

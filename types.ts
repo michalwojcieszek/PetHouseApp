@@ -25,3 +25,14 @@ export type PropertyType = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type CurrentUserType = {
+  createdAt: string;
+  email: string;
+  favourites: string[];
+  image?: string;
+  name: string;
+  password: string;
+  updatedAt: string;
+  _id: string;
+};

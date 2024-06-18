@@ -12,6 +12,10 @@ const UserSchema = new Schema(
       type: String,
       required: [true, "Name is required"],
     },
+    password: {
+      type: String,
+      required: [true, "Password is required"],
+    },
     favourites: [{ type: Schema.Types.ObjectId, ref: "Property" }],
   },
   {

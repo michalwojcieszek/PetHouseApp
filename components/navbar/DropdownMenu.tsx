@@ -4,23 +4,19 @@ import useLogin from "@/hooks/useLogin";
 import useMenu from "@/hooks/useMenu";
 import useRegister from "@/hooks/useRegister";
 import { IoMenuOutline } from "react-icons/io5";
+import LoggedMenu from "./LoggedMenu";
+import NotLoggedMenu from "./NotLoggedMenu";
 
-const DropdownMenu = () => {
+type DropdownMenuType = {
+  isLoggedIn: boolean;
+};
+
+const DropdownMenu = ({ isLoggedIn }: DropdownMenuType) => {
   const {
     isOpen: isDropdownOpen,
     open: openDropdown,
     close: closeDropdown,
   } = useMenu();
-  const {
-    isOpen: isRegisterOpen,
-    open: openRegister,
-    close: closeRegister,
-  } = useRegister();
-  const {
-    isOpen: isLoginOpen,
-    open: openLogin,
-    close: closeLogin,
-  } = useLogin();
 
   const handleToggle = (
     openCheck: boolean,
@@ -41,27 +37,16 @@ const DropdownMenu = () => {
     >
       <IoMenuOutline className="hover:opacity-80 " />
       <div
-        className={`z-99 mt-4 rounded-md border-[1px] right-0 bg-white absolute ${
+        className={`z-99 mt-5 rounded-md border-[1px] right-0 bg-white absolute ${
           isDropdownOpen ? "block" : "hidden"
         }`}
       >
         <ul className="flex flex-col text-center justify-center text-lg text-grey-main w-48">
-          <li
-            className="hover:bg-neutral-100 py-4"
-            onClick={() => handleToggle(isLoginOpen, openLogin, closeLogin)}
-          >
-            Login
-          </li>
-          <hr />
-          <li
-            className="hover:bg-neutral-100 py-4"
-            onClick={() =>
-              handleToggle(isRegisterOpen, openRegister, closeRegister)
-            }
-          >
-            Sign In
-          </li>
-          <hr />
+          {isLoggedIn ? (
+            <LoggedMenu />
+          ) : (
+            <NotLoggedMenu handleToggle={handleToggle} />
+          )}
         </ul>
       </div>
     </div>

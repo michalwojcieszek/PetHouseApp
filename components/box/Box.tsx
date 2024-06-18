@@ -3,6 +3,7 @@
 import { IoCloseCircleOutline, IoLogoGoogle } from "react-icons/io5";
 import Button from "../Button";
 import { ComponentPropsWithRef, FormEvent, ReactNode } from "react";
+import { signIn } from "next-auth/react";
 
 type BoxProps = {
   title: string;
@@ -15,6 +16,7 @@ type BoxProps = {
   alternativeOpen: () => void;
   isOpen: boolean;
   onSubmit: () => void;
+  isLoading: boolean;
 };
 
 const googleAuthCode = (
@@ -35,6 +37,7 @@ const Box = ({
   alternativeOpen,
   isOpen,
   onSubmit,
+  isLoading,
 }: BoxProps) => {
   if (!isOpen) return null;
 
@@ -81,8 +84,16 @@ const Box = ({
               </div>
               <div className="flex flex-col gap-6">{children}</div>
               <div className="flex flex-col gap-2">
-                <Button label={buttonLabel} type="submit" />
-                <Button label={googleAuthCode} type="submit" primary={false} />
+                <Button
+                  label={isLoading ? "Loading..." : buttonLabel}
+                  type="submit"
+                />
+                <Button
+                  label={googleAuthCode}
+                  primary={false}
+                  type="button"
+                  action={() => signIn("google")}
+                />
               </div>
             </div>
           </form>
