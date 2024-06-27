@@ -8,6 +8,7 @@ type PropertyCardPetsProps = {
   accept: boolean;
   capacity: number;
   price: number;
+  isHorizontal?: boolean;
 };
 
 const PropertyCardPets = ({
@@ -18,7 +19,7 @@ const PropertyCardPets = ({
   const petView = pets.find((pet) => pet.type === petAccepted.type);
 
   return (
-    <li className="flex flex-row items-center gap-1 lg:gap-2">
+    <li className={`flex flex-row items-center gap-1 lg:gap-2`}>
       {petView && (
         <Image src={petView?.icon} alt={petView?.type} width={25} height={25} />
       )}

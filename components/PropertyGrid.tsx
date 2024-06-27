@@ -1,20 +1,23 @@
 "use client";
 
 import { PropertyType } from "@/types";
-import PropertyCard from "./PropertyCard";
+import PropertyCard from "./card/PropertyCard";
 
 type PropertyGridType = {
   properties: PropertyType[];
+  propertiesHeader: string;
 };
 
-const PropertyGrid = ({ properties }: PropertyGridType) => {
+const PropertyGrid = ({ properties, propertiesHeader }: PropertyGridType) => {
   return (
-    // <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-    <ul className="flex flex-col gap-10">
-      {properties.map((property: PropertyType) => (
-        <PropertyCard key={property._id} property={property} />
-      ))}
-    </ul>
+    <>
+      <h2 className="text-xl font-semibold">{propertiesHeader}</h2>
+      <ul className="flex flex-col gap-10">
+        {properties.map((property: PropertyType) => (
+          <PropertyCard key={property._id} property={property} />
+        ))}
+      </ul>
+    </>
   );
 };
 export default PropertyGrid;

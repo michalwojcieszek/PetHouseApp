@@ -4,7 +4,6 @@ import "./globals.css";
 import RegisterBox from "@/components/box/RegisterBox";
 import LoginBox from "@/components/box/LoginBox";
 import ClientProvider from "@/components/ClientProvider";
-import Sidebar from "@/components/sidebar/Sidebar";
 import Container from "@/components/Container";
 import ToasterProvider from "@/providers/ToastProvider";
 import getUser from "./actions/getAuthUser";
@@ -26,12 +25,9 @@ const MainLayout = async ({ children }: MainLayoutProps) => {
         <ClientProvider>
           <ToasterProvider />
           <Navbar currentUser={currentUser} />
-          <Container>
-            <div className="pb-2 pt-10 grid grid-cols-1 lg:grid-cols-30/70 gap-8">
-              <Sidebar />
-              <div>{children}</div>
-            </div>
-          </Container>
+          <div className="pb-2 pt-10">
+            <Container>{children}</Container>
+          </div>
           <RegisterBox />
           <LoginBox />
         </ClientProvider>

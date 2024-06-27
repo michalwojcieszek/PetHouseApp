@@ -1,7 +1,8 @@
 import connectDB from "@/config/database";
 import Property from "@/models/Property";
 import ClientProvider from "@/components/ClientProvider";
-import PropertyGrid from "@/components/PropertyGrid";
+import ScreenGrid from "@/components/ScreenGrid";
+import SearchBox from "@/components/SearchBox";
 
 const HomePage = async () => {
   await connectDB();
@@ -18,10 +19,12 @@ const HomePage = async () => {
 
   return (
     <ClientProvider>
-      <div className="flex flex-col gap-3 py-4">
-        <h2 className="text-xl font-semibold">Properties available:</h2>
-        <PropertyGrid properties={properties} />
-      </div>
+      <ScreenGrid
+        propertiesHeader="Properties available:"
+        properties={properties}
+        sidebarInput={SearchBox}
+        sidebarHeader="Find accomodation for your pet!"
+      />
     </ClientProvider>
   );
 };

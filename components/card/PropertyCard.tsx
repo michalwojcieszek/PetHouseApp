@@ -15,7 +15,7 @@ const PropertyCard = ({ property }: { property: PropertyType }) => {
   return (
     <div
       className="rounded-md shadow-md cursor-pointer flex lg:flex-row flex-col"
-      onClick={() => router.push(`/${property._id}`)}
+      onClick={() => router.push(`/property/${property._id}`)}
     >
       <div className="overflow-hidden lg:w-60 rounded-t-md lg:rounded-l-md lg:rounded-tr-none">
         <Image
@@ -24,9 +24,6 @@ const PropertyCard = ({ property }: { property: PropertyType }) => {
           width={0}
           height={0}
           sizes="100vw"
-          // fill
-          // objectFit="cover"
-          // layout="fill"
           className="w-full hover:scale-110 transition"
         />
       </div>
