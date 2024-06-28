@@ -1,4 +1,4 @@
-type PetViewProps = {
+export type PetViewProps = {
   type: string;
   icon: string;
 };

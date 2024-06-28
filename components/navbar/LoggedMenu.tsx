@@ -20,7 +20,7 @@ const LoggedMenu = () => {
         Your favourites
       </MenuItem>
       <hr />
-      <MenuItem action={() => router.push("/favourites")}>
+      <MenuItem action={() => router.push("/property/new")}>
         Add new property
       </MenuItem>
       <hr />

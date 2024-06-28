@@ -2,7 +2,7 @@
 
 import useLogin from "@/hooks/useLogin";
 import Box from "./Box";
-import Input from "./Input";
+import Input from "../Input";
 import useRegister from "@/hooks/useRegister";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
@@ -15,7 +15,6 @@ const LoginBox = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { isOpen, close } = useLogin();
   const { open: openRegister } = useRegister();
-  const router = useRouter();
 
   const {
     register,
@@ -28,7 +27,6 @@ const LoginBox = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (inputs) => {
     await loginAuth(inputs, setIsLoading);
-    console.log("2");
     close();
     // setIsLoading(true);
     // signIn("credentials", { ...inputs, redirect: false }).then((callback) => {

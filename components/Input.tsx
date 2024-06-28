@@ -31,7 +31,7 @@ const Input = ({
         type={type}
         placeholder=" "
         disabled={disabled}
-        className={`peer rounded-md disabled:cursor-not-allowed p-6 border-[1px] ${
+        className={`peer rounded-md disabled:cursor-not-allowed p-6 border-[1px] border-gray-400 ${
           errors[id]
             ? "border-red-600 outline-red-600 focus:border-red-600"
             : "border-black"
@@ -42,8 +42,8 @@ const Input = ({
       <label
         className={`absolute top-6 left-6 ${
           value
-            ? "-translate-y-8 text-md bg-white px-3"
-            : "peer-focus:-translate-y-8 peer-focus:text-md peer-focus:bg-white peer-focus:px-3"
+            ? "-translate-y-8 text-md bg-white px-3 peer-focus:text-black"
+            : "peer-focus:-translate-y-8 peer-focus:text-md  peer-focus:bg-white peer-focus:px-3 text-gray-400"
         } ${errors[id] ? "text-red-600" : ""}`}
       >
         {label}
