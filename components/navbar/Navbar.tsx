@@ -27,8 +27,8 @@ const Navbar = ({ currentUser }: { currentUser: CurrentUserType }) => {
               <Image
                 src={currentUser?.image || placeholder}
                 alt="PetHouse logo"
-                width={30}
-                height={30}
+                width="25"
+                height="25"
                 className="rounded-full"
               />
             </div>

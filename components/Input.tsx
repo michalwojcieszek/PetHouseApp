@@ -26,7 +26,7 @@ const Input = ({
   const errorMessage = errors[id]?.message as string | undefined;
 
   return (
-    <div className="flex flex-col gap-1 relative">
+    <div className="flex flex-col gap-1 relative z-50">
       <input
         type={type}
         placeholder=" "

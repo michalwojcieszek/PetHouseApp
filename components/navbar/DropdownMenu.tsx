@@ -35,9 +35,9 @@ const DropdownMenu = ({ isLoggedIn }: DropdownMenuType) => {
       className="relative"
       onClick={() => handleToggle(isDropdownOpen, openDropdown, closeDropdown)}
     >
-      <IoMenuOutline className="hover:opacity-80 " />
+      <IoMenuOutline className="hover:opacity-80" />
       <div
-        className={`z-99 mt-5 rounded-md border-[1px] right-0 bg-white absolute ${
+        className={`z-[999] mt-5 rounded-md border-[1px] right-0 bg-white absolute ${
           isDropdownOpen ? "block" : "hidden"
         }`}
       >

@@ -6,6 +6,18 @@ import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import "leaflet/dist/leaflet.css";
+import { CountryType } from "../addProperty/SelectCountry";
+
+type MapProps = {
+  cords: {
+    lat: number;
+    lng: number;
+  };
+  street: string;
+  zipcode: string;
+  city: string;
+  state: CountryType;
+};
 
 L.Icon.Default.mergeOptions({
   iconUrl: markerIcon.src,
@@ -13,22 +25,33 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow.src,
 });
 
-const Map = () => {
+const Map = ({ cords, street, zipcode, city, state }: MapProps) => {
+  const { lat, lng } = cords;
+  console.log([lat, lng]);
   return (
     // <div className="w-full">
     <MapContainer
-      center={[1, 1]}
+      center={[lat, lng]}
       zoom={13}
       scrollWheelZoom={false}
-      className="h-[20vh]"
+      className="rounded-md h-96"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={[1, 1]}>
+      <Marker position={[lat, lng]}>
         <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
+          <div className="flex flex-col gap-2">
+            <span>{street}</span>
+            <span>
+              {zipcode}, {city}
+            </span>
+            <div className="flex gap-3">
+              <span>{state.flag}</span>
+              <span>{state.name}</span>
+            </div>
+          </div>
         </Popup>
       </Marker>
     </MapContainer>
