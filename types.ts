@@ -1,8 +1,9 @@
-type Pet = {
+export type PetType = {
   type: string;
   accept: boolean;
   capacity: number;
   price: number;
+  icon: string;
 };
 
 export type PropertyType = {
@@ -14,14 +15,18 @@ export type PropertyType = {
   location: {
     street?: string;
     city?: string;
-    state: string;
+    state: {
+      name: string;
+      flag: string;
+      code: string;
+    };
     zipcode?: string;
     cords: {
       lat: string;
       lng: string;
     };
   };
-  pets: Pet[];
+  pets: PetType[];
   createdAt: Date;
   updatedAt: Date;
 };

@@ -27,8 +27,15 @@ const PropertySchema = new Schema(
         type: String,
       },
       state: {
-        type: String,
-        required: true,
+        name: {
+          type: String,
+        },
+        flag: {
+          type: String,
+        },
+        code: {
+          type: String,
+        },
       },
       zipcode: {
         type: String,
@@ -60,6 +67,10 @@ const PropertySchema = new Schema(
           },
           price: {
             type: Number,
+            required: true,
+          },
+          icon: {
+            type: String,
             required: true,
           },
         },

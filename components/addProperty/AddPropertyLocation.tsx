@@ -43,7 +43,7 @@ const AddPropertyLocation = ({
       console.log(process.env.GOOGLE_GEOCODING_API);
       const getCords = async () => {
         setIsMapLoading(true);
-        const coordinatesString = `${street},${zipcode},${city},${state}`;
+        const coordinatesString = `${street},${zipcode},${city},${state.name}`;
         console.log(coordinatesString);
         const res = await fetch(
           `https://maps.googleapis.com/maps/api/geocode/json?address=${coordinatesString}&key=${process.env.NEXT_PUBLIC_GOOGLE_GEOCODING_API}`
@@ -112,7 +112,7 @@ const AddPropertyLocation = ({
             state={state}
           />
         ) : (
-          <div className="text-2xl text-gray-300 h-96 rounded-md border-[2px] border-gray-300 flex flex-col gap-3 items-center justify-center text-center px-4">
+          <div className="text-2xl text-gray-300 h-96 rounded-md border-[2px] border-gray-300 flex flex-col gap-3 items-center justify-center text-center px-4 cursor-not-allowed">
             {isMapLoading ? (
               <span>Loading...</span>
             ) : (

@@ -1,8 +1,6 @@
 "use client";
 
-import useLogin from "@/hooks/useLogin";
 import useMenu from "@/hooks/useMenu";
-import useRegister from "@/hooks/useRegister";
 import { IoMenuOutline } from "react-icons/io5";
 import LoggedMenu from "./LoggedMenu";
 import NotLoggedMenu from "./NotLoggedMenu";

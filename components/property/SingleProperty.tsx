@@ -15,6 +15,9 @@ const SingleProperty = ({ property }: SinglePropertyProps) => {
     street,
     city,
     state,
+    // : {
+    //   name, flag, code
+    // },
     zipcode,
     cords: { lat, lng },
   } = property.location;

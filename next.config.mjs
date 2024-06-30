@@ -9,6 +9,7 @@ const nextConfig = {
       "res.cloudinary.com",
       "example.com",
       "flagsapi.com",
+      "res.cloudinary.com",
     ],
   },
 };
