@@ -14,7 +14,7 @@ const PropertyCard = ({ property }: { property: PropertyType }) => {
 
   return (
     <div
-      className="rounded-md shadow-md cursor-pointer flex lg:flex-row flex-col"
+      className="rounded-md shadow-[0_0px_8px_-0px_rgba(0,0,0,0.07)] cursor-pointer flex lg:flex-row flex-col"
       onClick={() => router.push(`/property/${property._id}`)}
     >
       <div className="overflow-hidden lg:w-60 rounded-t-md lg:rounded-l-md lg:rounded-tr-none">

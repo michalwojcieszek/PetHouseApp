@@ -1,7 +1,7 @@
 "use client";
 
 import Input from "@/components/Input";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { pets } from "@/utils/petsAccepted";
 import Image from "next/image";
@@ -13,7 +13,6 @@ import Button from "../Button";
 import FormSection from "./AddPropertySection";
 import { sortPetsArr } from "@/utils/sortPetsArr";
 import { CurrentUserType, PetType } from "@/types";
-import getUser from "@/app/actions/getAuthUser";
 
 const petsArr = sortPetsArr(
   pets.map((pet) => {
@@ -78,7 +77,7 @@ const AddPropertyForm = ({ currentUser }: { currentUser: CurrentUserType }) => {
         ...clickedPets.filter(
           (clickedPet: PetType) => clickedPet.type !== pet.type
         ),
-        { ...petToEdit, accept: true, capacity: 1 },
+        { ...petToEdit, accept: true, capacity: 1, price: 1 },
       ]);
     }
 
@@ -133,7 +132,7 @@ const AddPropertyForm = ({ currentUser }: { currentUser: CurrentUserType }) => {
           <hr />
           <FormSection>
             <Header2>Select the pets you accept</Header2>
-            <ul className="flex flex-row gap-8">
+            <ul className="flex flex-row gap-8 mb-6">
               {clickedPets.map((pet, index) => (
                 <li
                   key={index}
@@ -154,16 +153,26 @@ const AddPropertyForm = ({ currentUser }: { currentUser: CurrentUserType }) => {
                 </li>
               ))}
             </ul>
-            <ul className="flex flex-col gap-6">
+            <ul className="flex flex-col gap-12">
               {clickedPets
                 .filter((pet) => pet.accept)
                 .map((pet, index) => (
                   <li key={index}>
-                    <Counter
-                      pet={pet}
-                      setClickedPets={setClickedPets}
-                      clickedPets={clickedPets}
-                    />
+                    <div className="flex gap-5 items-center">
+                      <div className="border-r-[1px] pr-5 h-full">
+                        <Image
+                          src={pet.icon}
+                          alt={pet.type}
+                          width={50}
+                          height={50}
+                        />
+                      </div>
+                      <Counter
+                        pet={pet}
+                        setClickedPets={setClickedPets}
+                        clickedPets={clickedPets}
+                      />
+                    </div>
                   </li>
                 ))}
             </ul>
@@ -194,7 +203,7 @@ const AddPropertyForm = ({ currentUser }: { currentUser: CurrentUserType }) => {
           </FormSection>
           <hr />
         </div>
-        <div className="w-1/3 mb-12">
+        <div className="w-1/2 sm:w-1/3 lg:w-1/5 mb-12">
           <Button label="Add a property" />
         </div>
       </form>

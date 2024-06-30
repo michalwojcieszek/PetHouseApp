@@ -2,10 +2,12 @@
 
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 import Input from "../Input";
-import Map from "../map/Map";
 import { SetStateAction, useEffect, useState } from "react";
 import { IoMapOutline } from "react-icons/io5";
 import SelectCountry, { CountryType } from "./SelectCountry";
+import dynamic from "next/dynamic";
+
+const Map = dynamic(() => import("@/components/map/Map"), { ssr: false });
 
 type AddPropertyLocationType = {
   register: UseFormRegister<FieldValues>;
@@ -54,7 +56,7 @@ const AddPropertyLocation = ({
       };
       getCords();
     }
-  }, [street, zipcode, city, state]);
+  }, [street, zipcode, city, state, setCords]);
 
   return (
     <>

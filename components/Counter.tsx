@@ -45,6 +45,20 @@ const Counter = ({ pet, setClickedPets, clickedPets }: CounterProps) => {
     }
   }, [pet, setClickedPets, currClickedPets]);
 
+  const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!currClickedPets) return;
+    const priceSelected = Number(e.target.value);
+    if (priceSelected <= 0) return;
+    setClickedPets((clickedPets) => {
+      return sortPetsArr([
+        ...clickedPets.filter(
+          (clickedPet: PetType) => clickedPet.type !== pet.type
+        ),
+        { ...currClickedPets, price: priceSelected },
+      ]);
+    });
+  };
+
   return (
     <div className="flex flex-col gap-3">
       <p>
@@ -73,11 +87,17 @@ const Counter = ({ pet, setClickedPets, clickedPets }: CounterProps) => {
           <span className="text-theme-color font-bold">{`${pet.type}s`}</span>
         </p>
       </div>
-      <div>
+      <div className="flex flex-col gap-5">
         <p>
-          Set your nightly price for{" "}
-          <span className="text-theme-color font-bold">{` ${pet.type}s`}</span>
+          Set your nightly price ($) for a{" "}
+          <span className="text-theme-color font-bold">{` ${pet.type}`}</span>
         </p>
+        <input
+          type="number"
+          value={pet.price}
+          onChange={handleChangePrice}
+          className="p-2 border-[1px] rounded-md w-32 text-center"
+        />
       </div>
     </div>
   );
