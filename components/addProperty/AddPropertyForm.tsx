@@ -1,7 +1,7 @@
 "use client";
 
 import Input from "@/components/Input";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { pets } from "@/utils/petsAccepted";
 import Image from "next/image";
@@ -12,7 +12,10 @@ import SelectImage from "./SelectImage";
 import Button from "../Button";
 import FormSection from "./AddPropertySection";
 import { sortPetsArr } from "@/utils/sortPetsArr";
-import { CurrentUserType, PetType } from "@/types";
+import { PetType } from "@/types";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const petsArr = sortPetsArr(
   pets.map((pet) => {
@@ -26,11 +29,15 @@ const petsArr = sortPetsArr(
   })
 );
 
-const AddPropertyForm = ({ currentUser }: { currentUser: CurrentUserType }) => {
+const AddPropertyForm = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [clickedPets, setClickedPets] = useState<PetType[]>(petsArr);
   const [cords, setCords] = useState(null);
-  console.log(currentUser);
+
+  const ifAtLeastOnePetAccepted = useMemo(() => {
+    return clickedPets.some((pet) => pet.accept);
+  }, [clickedPets]);
 
   const {
     register,
@@ -89,15 +96,33 @@ const AddPropertyForm = ({ currentUser }: { currentUser: CurrentUserType }) => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const { name, description, image, street, zipcode, city, state } = data;
+    if (!ifAtLeastOnePetAccepted || !state || !image) {
+      toast.error("Some data is missing");
+      return;
+    }
+
     const dataToBackend = {
-      location: { street, zipcode, city, state },
+      location: { street, zipcode, city, state, cords },
       name,
       description,
       image,
       pets: clickedPets,
-      owner: currentUser._id,
     };
     console.log(dataToBackend);
+
+    const createNewProperty = async () => {
+      setIsLoading(true);
+      try {
+        await axios.post("/api/properties", dataToBackend);
+        toast.success("New property successfully created");
+        router.push("/");
+      } catch (error) {
+        toast.error("Creating new property failed");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    createNewProperty();
   };
 
   return (
@@ -153,6 +178,11 @@ const AddPropertyForm = ({ currentUser }: { currentUser: CurrentUserType }) => {
                 </li>
               ))}
             </ul>
+            {!ifAtLeastOnePetAccepted && (
+              <span className="text-red-600">
+                Accepting at least one pet is required.
+              </span>
+            )}
             <ul className="flex flex-col gap-12">
               {clickedPets
                 .filter((pet) => pet.accept)
@@ -204,7 +234,7 @@ const AddPropertyForm = ({ currentUser }: { currentUser: CurrentUserType }) => {
           <hr />
         </div>
         <div className="w-1/2 sm:w-1/3 lg:w-1/5 mb-12">
-          <Button label="Add a property" />
+          <Button label="Add a property" type="submit" />
         </div>
       </form>
     </div>

@@ -83,7 +83,7 @@ const Counter = ({ pet, setClickedPets, clickedPets }: CounterProps) => {
           +
         </button>
         <p>
-          You can have a maximum of {pet.capacity}{" "}
+          You can have currently selected a maximum of {pet.capacity}{" "}
           <span className="text-theme-color font-bold">{`${pet.type}s`}</span>
         </p>
       </div>

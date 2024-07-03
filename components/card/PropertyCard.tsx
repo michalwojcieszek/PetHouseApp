@@ -10,7 +10,7 @@ const PropertyCard = ({ property }: { property: PropertyType }) => {
   const { pets } = property;
   const { location } = property;
 
-  const petsAccepted = pets.filter((pet) => pet.accept === true);
+  const petsAccepted = pets.filter((pet) => pet.accept);
 
   return (
     <div
@@ -36,7 +36,7 @@ const PropertyCard = ({ property }: { property: PropertyType }) => {
           <p>flag img</p>
           <p>
             {location.street}, {location.zipcode} {location.city} -{" "}
-            {location.state}
+            {location.state.name}
           </p>
         </div>
         <div className="flex flex-col gap-2">
