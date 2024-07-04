@@ -22,8 +22,8 @@ export type PropertyType = {
     };
     zipcode?: string;
     cords: {
-      lat: string;
-      lng: string;
+      lat: number;
+      lng: number;
     };
   };
   pets: PetType[];
@@ -31,13 +31,16 @@ export type PropertyType = {
   updatedAt: Date;
 };
 
-export type CurrentUserType = {
+export type UserType = {
   createdAt: string;
   email: string;
   favourites: string[];
-  image?: string;
   name: string;
   password: string;
   updatedAt: string;
   _id: string;
+};
+
+export type CurrentUserType = UserType & {
+  image?: string;
 };

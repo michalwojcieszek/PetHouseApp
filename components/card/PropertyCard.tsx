@@ -4,6 +4,7 @@ import { PropertyType } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import PropertyCardPets from "./PropertyCardPets";
+import FlagImg from "../FlagImg";
 
 const PropertyCard = ({ property }: { property: PropertyType }) => {
   const router = useRouter();
@@ -32,8 +33,11 @@ const PropertyCard = ({ property }: { property: PropertyType }) => {
           <h2 className="font-bold text-xl">{property.name}</h2>
           <h3 className="text-grey-secondary">{property.description}</h3>
         </div>
-        <div className="flex flex-row gap-2">
-          <p>flag img</p>
+        <div className="flex flex-row gap-2 items-center">
+          <FlagImg
+            code={property.location.state.code}
+            name={property.location.state.name}
+          />
           <p>
             {location.street}, {location.zipcode} {location.city} -{" "}
             {location.state.name}

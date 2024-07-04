@@ -1,3 +1,4 @@
+import { getUserById } from "@/app/actions/getUserById";
 import ClientProvider from "@/components/ClientProvider";
 import ScreenGrid from "@/components/ScreenGrid";
 import SearchBox from "@/components/SearchBox";
@@ -16,7 +17,7 @@ const PropertyPage = async ({ params }: { params: IParams }) => {
   const propertyNotJSON = await Property.findOne({ _id: id });
   //fixing error 'Only plain objects can be passed to Client Components from Server Components'
   const property = JSON.parse(JSON.stringify(propertyNotJSON));
-  console.log(property);
+  const ownerUser = await getUserById(property.owner);
 
   return (
     <ClientProvider>
@@ -24,6 +25,7 @@ const PropertyPage = async ({ params }: { params: IParams }) => {
         sidebarHeader="Find the proper date!"
         sidebarInput={SearchBox}
         property={property}
+        ownerUser={ownerUser}
       />
     </ClientProvider>
   );

@@ -7,6 +7,7 @@ import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import "leaflet/dist/leaflet.css";
 import { CountryType } from "../addProperty/SelectCountry";
+import FlagImg from "../FlagImg";
 
 type MapProps = {
   cords: {
@@ -33,7 +34,7 @@ const Map = ({ cords, street, zipcode, city, state }: MapProps) => {
     <MapContainer
       center={[lat, lng]}
       zoom={13}
-      scrollWheelZoom={false}
+      scrollWheelZoom={true}
       className="rounded-md h-96"
     >
       <TileLayer
@@ -43,13 +44,18 @@ const Map = ({ cords, street, zipcode, city, state }: MapProps) => {
       <Marker position={[lat, lng]}>
         <Popup>
           <div className="flex flex-col gap-2">
-            <span>{street}</span>
+            <span className="font-semibold">{street}</span>
             <span>
-              {zipcode}, {city}
+              {zipcode}{" "}
+              <span className="font-semibold text-theme-color ">{city}</span>
             </span>
-            <div className="flex gap-3">
-              <span>{state.flag}</span>
-              <span>{state.name}</span>
+            <div className="flex gap-2 items-center justify-center">
+              <FlagImg code={state.code} name={state.name} />
+              <div>
+                <span className="text-md uppercase font-semibold my-0">
+                  {state.name}
+                </span>
+              </div>
             </div>
           </div>
         </Popup>

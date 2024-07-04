@@ -3,6 +3,7 @@
 import { SetStateAction, useCallback, useMemo } from "react";
 import { sortPetsArr } from "@/utils/sortPetsArr";
 import { PetType } from "@/types";
+import { IoAdd, IoRemove } from "react-icons/io5";
 
 type CounterProps = {
   pet: PetType;
@@ -72,7 +73,7 @@ const Counter = ({ pet, setClickedPets, clickedPets }: CounterProps) => {
           disabled={pet.capacity === 1}
           onClick={onDecrease}
         >
-          -
+          <IoRemove />
         </button>
         <div>{pet.capacity}</div>
         <button
@@ -80,7 +81,7 @@ const Counter = ({ pet, setClickedPets, clickedPets }: CounterProps) => {
           className="p-4 border-[1px] rounded-full w-10 h-10 flex items-center text-gray-400"
           onClick={onIncrease}
         >
-          +
+          <IoAdd />
         </button>
         <p>
           You can have currently selected a maximum of {pet.capacity}{" "}

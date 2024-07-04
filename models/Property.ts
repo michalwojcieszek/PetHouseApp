@@ -42,40 +42,40 @@ const PropertySchema = new Schema(
       },
       cords: {
         lat: {
-          type: String,
+          type: Number,
           required: true,
         },
         lng: {
+          type: Number,
+          required: true,
+        },
+      },
+    },
+    pets: [
+      {
+        type: {
+          type: String,
+          enum: ["dog", "cat", "parrot", "hamster", "snake"],
+          required: true,
+        },
+        accept: {
+          type: Boolean,
+          required: true,
+        },
+        capacity: {
+          type: Number,
+          required: true,
+        },
+        price: {
+          type: Number,
+          required: true,
+        },
+        icon: {
           type: String,
           required: true,
         },
       },
-      pets: [
-        {
-          type: {
-            type: String,
-            enum: ["dog", "cat", "parrot", "hamster", "snake"],
-            required: true,
-          },
-          accept: {
-            type: Boolean,
-            required: true,
-          },
-          capacity: {
-            type: Number,
-            required: true,
-          },
-          price: {
-            type: Number,
-            required: true,
-          },
-          icon: {
-            type: String,
-            required: true,
-          },
-        },
-      ],
-    },
+    ],
   },
   {
     timestamps: true,

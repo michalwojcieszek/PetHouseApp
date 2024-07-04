@@ -1,6 +1,6 @@
 "use client";
 
-import { PropertyType } from "@/types";
+import { CurrentUserType, PropertyType, UserType } from "@/types";
 import PropertyGrid from "./PropertyGrid";
 import Sidebar from "./sidebar/Sidebar";
 import SingleProperty from "./property/SingleProperty";
@@ -20,6 +20,7 @@ type MainContentOnly = {
 type ScreenGridProps = {
   sidebarInput: React.ComponentType;
   sidebarHeader: string;
+  ownerUser: UserType;
 } & (PropertiesOnly | MainContentOnly);
 
 const ScreenGrid = ({
@@ -28,6 +29,7 @@ const ScreenGrid = ({
   sidebarHeader,
   propertiesHeader,
   property,
+  ownerUser,
 }: ScreenGridProps) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-30/70 lg:gap-8">
@@ -42,7 +44,7 @@ const ScreenGrid = ({
               propertiesHeader={propertiesHeader}
             />
           ) : property ? (
-            <SingleProperty property={property} />
+            <SingleProperty property={property} ownerUser={ownerUser} />
           ) : null}
         </div>
       </div>
