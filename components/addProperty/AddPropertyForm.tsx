@@ -90,7 +90,6 @@ const AddPropertyForm = () => {
 
     setClickedPets((clickedPets) => sortPetsArr(clickedPets));
 
-    console.log(clickedPets);
     if (!petToEdit) return;
   };
 
@@ -108,7 +107,6 @@ const AddPropertyForm = () => {
       image,
       pets: clickedPets,
     };
-    console.log(dataToBackend);
 
     const createNewProperty = async () => {
       setIsLoading(true);

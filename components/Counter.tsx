@@ -69,7 +69,7 @@ const Counter = ({ pet, setClickedPets, clickedPets }: CounterProps) => {
       <div className="flex flex-row items-center gap-5">
         <button
           type="button"
-          className="p-4 border-[1px] rounded-full w-10 h-10 flex items-center text-gray-400"
+          className="p-4 border-[1px] rounded-full w-15 h-15 flex items-center text-gray-400"
           disabled={pet.capacity === 1}
           onClick={onDecrease}
         >
@@ -78,7 +78,7 @@ const Counter = ({ pet, setClickedPets, clickedPets }: CounterProps) => {
         <div>{pet.capacity}</div>
         <button
           type="button"
-          className="p-4 border-[1px] rounded-full w-10 h-10 flex items-center text-gray-400"
+          className="p-4 border-[1px] rounded-full w-15 h-15 flex items-center text-gray-400"
           onClick={onIncrease}
         >
           <IoAdd />

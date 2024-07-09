@@ -41,12 +41,9 @@ const AddPropertyLocation = ({
 
   useEffect(() => {
     if (street && zipcode && city && state) {
-      console.log(street, zipcode, city, state);
-      console.log(process.env.GOOGLE_GEOCODING_API);
       const getCords = async () => {
         setIsMapLoading(true);
         const coordinatesString = `${street},${zipcode},${city},${state.name}`;
-        console.log(coordinatesString);
         const res = await fetch(
           `https://maps.googleapis.com/maps/api/geocode/json?address=${coordinatesString}&key=${process.env.NEXT_PUBLIC_GOOGLE_GEOCODING_API}`
         );

@@ -25,13 +25,11 @@ export const authOptions: AuthOptions = {
         },
       },
       async authorize(credentials) {
-        console.log(credentials);
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid credentials");
         }
         await connectDB();
         const user = await User.findOne({ email: credentials.email });
-        console.log(user);
 
         if (!user || !user?.password) {
           throw new Error("No user found");

@@ -1,9 +1,9 @@
 "use client";
 
 import { CurrentUserType, PropertyType, UserType } from "@/types";
-import PropertyGrid from "./PropertyGrid";
 import Sidebar from "./sidebar/Sidebar";
 import SingleProperty from "./property/SingleProperty";
+import PropertiesGrid from "./PropertiesGrid";
 
 type PropertiesOnly = {
   propertiesHeader: string;
@@ -15,12 +15,13 @@ type MainContentOnly = {
   propertiesHeader?: string;
   properties?: PropertyType[];
   property: PropertyType;
+  ownerUser: UserType;
 };
 
 type ScreenGridProps = {
   sidebarInput: React.ComponentType;
   sidebarHeader: string;
-  ownerUser: UserType;
+  currentUserFavourites?: string[];
 } & (PropertiesOnly | MainContentOnly);
 
 const ScreenGrid = ({
@@ -30,6 +31,7 @@ const ScreenGrid = ({
   propertiesHeader,
   property,
   ownerUser,
+  currentUserFavourites,
 }: ScreenGridProps) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-30/70 lg:gap-8">
@@ -39,12 +41,17 @@ const ScreenGrid = ({
       <div className="">
         <div className="flex flex-col gap-3 py-4">
           {properties && properties.length > 0 && propertiesHeader ? (
-            <PropertyGrid
+            <PropertiesGrid
               properties={properties}
               propertiesHeader={propertiesHeader}
+              currentUserFavourites={currentUserFavourites}
             />
           ) : property ? (
-            <SingleProperty property={property} ownerUser={ownerUser} />
+            <SingleProperty
+              property={property}
+              ownerUser={ownerUser}
+              currentUserFavourites={currentUserFavourites}
+            />
           ) : null}
         </div>
       </div>

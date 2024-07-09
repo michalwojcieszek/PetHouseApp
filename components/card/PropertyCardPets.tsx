@@ -13,17 +13,21 @@ type PropertyCardPetsProps = {
 
 const PropertyCardPets = ({
   petAccepted,
+  petInfo,
 }: {
   petAccepted: PropertyCardPetsProps;
+  petInfo?: keyof PropertyCardPetsProps | undefined;
 }) => {
   const petView = pets.find((pet) => pet.type === petAccepted.type);
 
   return (
-    <li className={`flex flex-row items-center gap-1 lg:gap-2`}>
+    <li className={`flex flex-row items-center gap-3`}>
       {petView && (
         <Image src={petView?.icon} alt={petView?.type} width={25} height={25} />
       )}
-      <span className="text-theme-color font-semibold text-xs lg:text-base">{`${petAccepted.type}s`}</span>
+      <span className="text-theme-color font-semibold text-base">
+        {petInfo ? `${petAccepted[petInfo]}` : `${petAccepted.type}s`}
+      </span>
     </li>
   );
 };

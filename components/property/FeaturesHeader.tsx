@@ -1,17 +1,15 @@
-import { IconType } from "react-icons";
+"use client";
+
 import Header3 from "../Header3";
 
 type FeaturesHeaderProps = {
-  icon: IconType;
   children: string;
 };
 
-const FeaturesHeader = ({ icon: Icon, children }: FeaturesHeaderProps) => {
+const FeaturesHeader = ({ children }: FeaturesHeaderProps) => {
   return (
     <div className="flex gap-2 items-center">
-      <p className="text-2xl">
-        <Icon />
-      </p>
+      {/* <p className="text-2xl"><Icon /></p> */}
       <Header3>{children}</Header3>
     </div>
   );

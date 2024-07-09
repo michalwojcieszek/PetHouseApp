@@ -1,3 +1,4 @@
+import getUser from "@/app/actions/getAuthUser";
 import { getUserById } from "@/app/actions/getUserById";
 import ClientProvider from "@/components/ClientProvider";
 import ScreenGrid from "@/components/ScreenGrid";
@@ -18,6 +19,8 @@ const PropertyPage = async ({ params }: { params: IParams }) => {
   //fixing error 'Only plain objects can be passed to Client Components from Server Components'
   const property = JSON.parse(JSON.stringify(propertyNotJSON));
   const ownerUser = await getUserById(property.owner);
+  const currentUser = await getUser();
+  const currentUserFavourites = currentUser?.favourites;
 
   return (
     <ClientProvider>
@@ -26,6 +29,7 @@ const PropertyPage = async ({ params }: { params: IParams }) => {
         sidebarInput={SearchBox}
         property={property}
         ownerUser={ownerUser}
+        currentUserFavourites={currentUserFavourites}
       />
     </ClientProvider>
   );

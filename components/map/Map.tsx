@@ -28,7 +28,6 @@ L.Icon.Default.mergeOptions({
 
 const Map = ({ cords, street, zipcode, city, state }: MapProps) => {
   const { lat, lng } = cords;
-  console.log([lat, lng]);
   return (
     // <div className="w-full">
     <MapContainer

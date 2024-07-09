@@ -15,17 +15,16 @@ type MainLayoutProps = {
 const font = Nunito({ subsets: ["latin"] });
 
 const MainLayout = async ({ children }: MainLayoutProps) => {
-  const currentUserNotJSON = await getUser();
-  const currentUser = JSON.parse(JSON.stringify(currentUserNotJSON));
+  const currentUser = await getUser();
+  // const currentUser = JSON.parse(JSON.stringify(currentUserNotJSON));
 
-  console.log(currentUser);
   return (
     <html lang="en">
       <body className={font.className}>
         <ClientProvider>
           <ToasterProvider />
           <Navbar currentUser={currentUser} />
-          <div className="pb-2 pt-10">
+          <div className="pb-2 pt-4">
             <Container>{children}</Container>
           </div>
           <RegisterBox />

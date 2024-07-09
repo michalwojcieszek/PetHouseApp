@@ -22,7 +22,7 @@ export default async function getUser() {
     if (!currentUser) return null;
 
     if (image) {
-      return { ...currentUser.toObject(), image };
+      return JSON.parse(JSON.stringify({ ...currentUser.toObject(), image }));
     } else {
       return currentUser;
     }

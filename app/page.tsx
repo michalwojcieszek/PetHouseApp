@@ -3,12 +3,16 @@ import Property from "@/models/Property";
 import ClientProvider from "@/components/ClientProvider";
 import ScreenGrid from "@/components/ScreenGrid";
 import SearchBox from "@/components/SearchBox";
+import getUser from "./actions/getAuthUser";
+import { getUserById } from "./actions/getUserById";
 
 const HomePage = async () => {
   await connectDB();
   const propertiesNotJSON = await Property.find({});
   //fixing error 'Only plain objects can be passed to Client Components from Server Components'
   const properties = JSON.parse(JSON.stringify(propertiesNotJSON));
+  const currentUser = await getUser();
+  const currentUserFavourites = currentUser?.favourites;
 
   if (!properties || properties.length === 0)
     return (
@@ -24,6 +28,7 @@ const HomePage = async () => {
         properties={properties}
         sidebarInput={SearchBox}
         sidebarHeader="Find accomodation for your pet!"
+        currentUserFavourites={currentUserFavourites}
       />
     </ClientProvider>
   );

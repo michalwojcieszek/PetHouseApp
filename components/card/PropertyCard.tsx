@@ -5,8 +5,16 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import PropertyCardPets from "./PropertyCardPets";
 import FlagImg from "../FlagImg";
+import PropertyImg from "../PropertyImg";
+import AddToFavourite from "../AddToFavourite";
 
-const PropertyCard = ({ property }: { property: PropertyType }) => {
+const PropertyCard = ({
+  property,
+  currentUserFavourites,
+}: {
+  property: PropertyType;
+  currentUserFavourites?: string[];
+}) => {
   const router = useRouter();
   const { pets } = property;
   const { location } = property;
@@ -15,18 +23,16 @@ const PropertyCard = ({ property }: { property: PropertyType }) => {
 
   return (
     <div
-      className="rounded-md shadow-[0_0px_8px_-0px_rgba(0,0,0,0.07)] cursor-pointer flex lg:flex-row flex-col"
+      className="rounded-md shadow-[0_0px_8px_-0px_rgba(0,0,0,0.07)] cursor-pointer flex lg:flex-row lg:gap-3 flex-col"
       onClick={() => router.push(`/property/${property._id}`)}
     >
-      <div className="overflow-hidden lg:w-60 rounded-t-md lg:rounded-l-md lg:rounded-tr-none">
-        <Image
+      <div className="overflow-hidden lg:w-60 rounded-t-md lg:rounded-l-md lg:rounded-tr-none relative">
+        <PropertyImg
           src={property.image}
           alt={property.name}
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="w-full hover:scale-110 transition"
+          id={property._id}
         />
+        <AddToFavourite currentUserFavourites={currentUserFavourites} />
       </div>
       <div className="flex flex-col gap-3 px-4 py-3">
         <div>
