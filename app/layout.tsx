@@ -24,7 +24,7 @@ const MainLayout = async ({ children }: MainLayoutProps) => {
         <ClientProvider>
           <ToasterProvider />
           <Navbar currentUser={currentUser} />
-          <div className="pb-2 pt-4">
+          <div className="pb-2 pt-4 xl:pt-8">
             <Container>{children}</Container>
           </div>
           <RegisterBox />

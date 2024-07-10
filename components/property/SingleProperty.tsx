@@ -52,7 +52,10 @@ const SingleProperty = ({
             alt={property.name}
             id={property._id}
           />
-          <AddToFavourite currentUserFavourites={currentUserFavourites} />
+          <AddToFavourite
+            currentPropertyId={property._id}
+            currentUserFavourites={currentUserFavourites}
+          />
         </div>
         <div className="flex flex-col gap-5">
           <FeaturesFlexCol>

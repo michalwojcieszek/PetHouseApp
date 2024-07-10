@@ -1,7 +1,6 @@
 "use client";
 
 import { PropertyType } from "@/types";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import PropertyCardPets from "./PropertyCardPets";
 import FlagImg from "../FlagImg";
@@ -10,9 +9,11 @@ import AddToFavourite from "../AddToFavourite";
 
 const PropertyCard = ({
   property,
+  currentUserId,
   currentUserFavourites,
 }: {
   property: PropertyType;
+  currentUserId?: string;
   currentUserFavourites?: string[];
 }) => {
   const router = useRouter();
@@ -32,7 +33,10 @@ const PropertyCard = ({
           alt={property.name}
           id={property._id}
         />
-        <AddToFavourite currentUserFavourites={currentUserFavourites} />
+        <AddToFavourite
+          currentPropertyId={property._id}
+          currentUserFavourites={currentUserFavourites}
+        />
       </div>
       <div className="flex flex-col gap-3 px-4 py-3">
         <div>

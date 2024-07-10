@@ -10,14 +10,16 @@ type PropertyImgProps = {
 
 const PropertyImg = ({ src, alt }: PropertyImgProps) => {
   return (
-    <Image
-      src={src}
-      alt={alt}
-      width={0}
-      height={0}
-      sizes="100vw"
-      className="w-full hover:scale-110 transition"
-    />
+    <div className="overflow-hidden">
+      <Image
+        src={src}
+        alt={alt}
+        width={0}
+        height={0}
+        sizes="100vw"
+        className="w-full hover:scale-110 transition"
+      />
+    </div>
   );
 };
 export default PropertyImg;
