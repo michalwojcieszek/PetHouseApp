@@ -22,7 +22,6 @@ export async function POST(request: Request, { params }: { params: IParams }) {
     let message;
 
     if (user.favourites.includes(propertyId)) {
-      console.log(true);
       user.favourites = user.favourites.filter(
         (curId: string) => curId != propertyId
       );
@@ -32,7 +31,6 @@ export async function POST(request: Request, { params }: { params: IParams }) {
       message = "Successfully added property to favourites";
     }
     await user.save();
-    console.log(user);
 
     return NextResponse.json({ message });
   } catch (error) {

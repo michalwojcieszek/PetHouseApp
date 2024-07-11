@@ -8,8 +8,11 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import loginAuth from "@/app/actions/loginAuth";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const RegisterBox = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const { isOpen, close } = useRegister();
@@ -28,19 +31,12 @@ const RegisterBox = () => {
     async function register(inputs: FieldValues) {
       try {
         setIsLoading(true);
-        const res = await fetch("/api/register", {
-          method: "POST",
-          body: JSON.stringify(inputs),
-        });
-        const data = await res.json();
-
-        if (!res.ok) {
-          throw new Error(data.error || "Something went wrong");
-        }
+        await axios.post("/api/register", inputs);
 
         toast.success("Registered successfully");
         //automatic logging in after registration
         await loginAuth(inputs, setIsLoading);
+        router.refresh();
         close();
       } catch (error: any) {
         toast.error(error.message || "Something went wrong");

@@ -10,8 +10,8 @@ export default async function getUser() {
     if (!session || !session?.user) {
       return null;
     }
-    console.log(`SESSION:`);
-    console.log(session);
+
+    const { name, email } = session.user;
 
     let image;
     if (session?.user?.image) {
@@ -20,13 +20,20 @@ export default async function getUser() {
       image = null;
     }
 
-    const currentUser = await User.findOne({ email: session?.user?.email });
-    if (!currentUser) return null;
+    const userEmail = session?.user?.email;
+
+    let currentUser = await User.findOne({ email: userEmail });
+    // if no user found, create a new one and send to DB
+    if (!currentUser) {
+      const newUser = new User({ email, name });
+      await newUser.save();
+      currentUser = newUser;
+    }
 
     if (image) {
       return JSON.parse(JSON.stringify({ ...currentUser.toObject(), image }));
     } else {
-      return currentUser;
+      return JSON.parse(JSON.stringify({ ...currentUser.toObject() }));
     }
   } catch (error) {
     return null;

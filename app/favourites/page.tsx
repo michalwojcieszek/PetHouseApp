@@ -6,7 +6,6 @@ import PropertiesGrid from "@/components/PropertiesGrid";
 const FavouritesPage = async () => {
   const favouriteProperties = await getFavouriteListings();
 
-  console.log(favouriteProperties);
   return (
     <div className="flex flex-col gap-3 py-4">
       <PropertiesGrid

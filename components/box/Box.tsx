@@ -2,11 +2,8 @@
 
 import { IoCloseCircleOutline, IoLogoGoogle } from "react-icons/io5";
 import Button from "../Button";
-import { ComponentPropsWithRef, FormEvent, ReactNode } from "react";
-import { signIn, signOut } from "next-auth/react";
-import { getServerSession } from "next-auth";
-import axios from "axios";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { FormEvent, ReactNode } from "react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 type BoxProps = {
@@ -65,10 +62,7 @@ const Box = ({
 
   const googleHandler = () => {
     const asyncGoogleHandler = async () => {
-      await signOut();
       await signIn("google");
-      await axios.post("/api/register/google");
-      router.refresh();
     };
     asyncGoogleHandler();
   };

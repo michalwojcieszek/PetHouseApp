@@ -6,12 +6,11 @@ import Input from "../Input";
 import useRegister from "@/hooks/useRegister";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import loginAuth from "@/app/actions/loginAuth";
 
 const LoginBox = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { isOpen, close } = useLogin();
   const { open: openRegister } = useRegister();
@@ -27,6 +26,7 @@ const LoginBox = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (inputs) => {
     await loginAuth(inputs, setIsLoading);
+    router.refresh();
     close();
     // setIsLoading(true);
     // signIn("credentials", { ...inputs, redirect: false }).then((callback) => {

@@ -18,7 +18,6 @@ const Navbar = ({ currentUser }: { currentUser: CurrentUserType }) => {
     open: openDropdown,
     close: closeDropdown,
   } = useMenu();
-  console.log(currentUser);
 
   const handleToggle = (
     openCheck: boolean,
