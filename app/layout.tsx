@@ -16,6 +16,8 @@ const font = Nunito({ subsets: ["latin"] });
 
 const MainLayout = async ({ children }: MainLayoutProps) => {
   const currentUser = await getUser();
+  console.log("CURRENTUSER");
+  console.log(currentUser);
   // const currentUser = JSON.parse(JSON.stringify(currentUserNotJSON));
 
   return (

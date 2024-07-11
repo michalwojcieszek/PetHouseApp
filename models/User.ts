@@ -14,7 +14,7 @@ const UserSchema = new Schema(
     },
     password: {
       type: String,
-      required: [true, "Password is required"],
+      required: false,
     },
     favourites: [{ type: Schema.Types.ObjectId, ref: "Property" }],
   },

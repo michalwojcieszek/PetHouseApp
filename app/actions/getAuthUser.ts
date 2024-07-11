@@ -10,6 +10,8 @@ export default async function getUser() {
     if (!session || !session?.user) {
       return null;
     }
+    console.log(`SESSION:`);
+    console.log(session);
 
     let image;
     if (session?.user?.image) {

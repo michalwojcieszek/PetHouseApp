@@ -3,7 +3,11 @@
 import { IoCloseCircleOutline, IoLogoGoogle } from "react-icons/io5";
 import Button from "../Button";
 import { ComponentPropsWithRef, FormEvent, ReactNode } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import axios from "axios";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { useRouter } from "next/navigation";
 
 type BoxProps = {
   title: string;
@@ -39,6 +43,7 @@ const Box = ({
   onSubmit,
   isLoading,
 }: BoxProps) => {
+  const router = useRouter();
   if (!isOpen) return null;
 
   const handleCloseBox = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -56,6 +61,16 @@ const Box = ({
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit();
+  };
+
+  const googleHandler = () => {
+    const asyncGoogleHandler = async () => {
+      await signOut();
+      await signIn("google");
+      await axios.post("/api/register/google");
+      router.refresh();
+    };
+    asyncGoogleHandler();
   };
 
   return (
@@ -92,7 +107,7 @@ const Box = ({
                   label={googleAuthCode}
                   primary={false}
                   type="button"
-                  action={() => signIn("google")}
+                  action={() => googleHandler()}
                 />
               </div>
             </div>

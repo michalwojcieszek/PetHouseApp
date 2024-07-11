@@ -33,7 +33,7 @@ const NotLoggedMenu = ({ handleToggle }: LoggedMenuProps) => {
       <MenuItem
         action={() => handleToggle(isRegisterOpen, openRegister, closeRegister)}
       >
-        Sign In
+        Sign Up
       </MenuItem>
     </>
   );

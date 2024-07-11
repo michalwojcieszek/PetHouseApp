@@ -6,21 +6,63 @@ import PropertyCardPets from "./PropertyCardPets";
 import FlagImg from "../FlagImg";
 import PropertyImg from "../PropertyImg";
 import AddToFavourite from "../AddToFavourite";
+import { useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
+import Loader from "../Loader";
+import RemoveButton from "../RemoveButton";
 
 const PropertyCard = ({
   property,
   currentUserId,
   currentUserFavourites,
+  additionalInfo,
+  type,
 }: {
   property: PropertyType;
   currentUserId?: string;
   currentUserFavourites?: string[];
+  additionalInfo?: string;
+  type?: string;
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { pets } = property;
   const { location } = property;
 
   const petsAccepted = pets.filter((pet) => pet.accept);
+
+  const handleToggleFavourite = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.stopPropagation();
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(`/api/favourites/${property._id}`);
+      toast.success(data.message);
+      router.refresh();
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDeleteOwnProperty = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.stopPropagation();
+    try {
+      setIsLoading(true);
+      const { data } = await axios.delete(`/api/properties/${property._id}`);
+      toast.success(data.message);
+      router.refresh();
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div
@@ -63,9 +105,32 @@ const PropertyCard = ({
             ))}
           </ul>
         </div>
-        <button className="font-semibold bg-theme-color rounded-md py-1 w-1/3 text-white hover:opacity-80 tracking-wid mt-auto">
-          Details
-        </button>
+        {/* <p>
+          {location.street}, {location.zipcode} {location.city} -{" "}
+          {location.state.name}
+        </p> */}
+
+        {isLoading && <Loader />}
+
+        {!isLoading && type === "favourites" && (
+          <div>
+            <RemoveButton onClick={handleToggleFavourite}>
+              Remove from favourites
+            </RemoveButton>
+          </div>
+        )}
+        {!isLoading && type === "own" && (
+          <div>
+            <RemoveButton onClick={handleDeleteOwnProperty}>
+              Delete property
+            </RemoveButton>
+          </div>
+        )}
+        {!isLoading && !type && (
+          <button className="font-semibold bg-theme-color rounded-md py-1 w-1/3 text-white hover:opacity-80 tracking-wid mt-auto">
+            Details
+          </button>
+        )}
       </div>
     </div>
   );
