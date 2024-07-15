@@ -10,7 +10,7 @@ const Sidebar = ({
   sidebarHeader,
 }: SidebarProps) => {
   return (
-    <div className="lg:border-r-[1px] flex flex-col gap-3 pr-8 py-4">
+    <div className="flex flex-col gap-3 pr-8 py-4">
       <h2 className="text-xl font-semibold">{sidebarHeader}</h2>
       <SidebarInput />
     </div>

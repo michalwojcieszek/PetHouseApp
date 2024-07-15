@@ -2,8 +2,6 @@ import getUser from "@/app/actions/getAuthUser";
 import { getUserById } from "@/app/actions/getUserById";
 import ClientProvider from "@/components/ClientProvider";
 import ScreenGrid from "@/components/ScreenGrid";
-import SearchBox from "@/components/SearchBox";
-import SingleProperty from "@/components/property/SingleProperty";
 import connectDB from "@/config/database";
 import Property from "@/models/Property";
 
@@ -20,16 +18,14 @@ const PropertyPage = async ({ params }: { params: IParams }) => {
   const property = JSON.parse(JSON.stringify(propertyNotJSON));
   const ownerUser = await getUserById(property.owner);
   const currentUser = await getUser();
-  const currentUserFavourites = currentUser?.favourites;
 
   return (
     <ClientProvider>
       <ScreenGrid
-        sidebarHeader="Find the proper date!"
-        sidebarInput={SearchBox}
+        sidebarHeader="Create a booking now!"
         property={property}
         ownerUser={ownerUser}
-        currentUserFavourites={currentUserFavourites}
+        currentUser={currentUser}
       />
     </ClientProvider>
   );

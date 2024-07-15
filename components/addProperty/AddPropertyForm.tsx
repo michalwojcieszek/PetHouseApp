@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { pets } from "@/utils/petsAccepted";
 import Image from "next/image";
-import Counter from "@/components/Counter";
+import Counter from "@/components/NewPropertyPetsCounter";
 import Header2 from "@/components/Header2";
 import AddPropertyLocation from "@/components/addProperty/AddPropertyLocation";
 import SelectImage from "./SelectImage";
@@ -125,7 +125,7 @@ const AddPropertyForm = () => {
 
   return (
     <div className="flex flex-col gap-5">
-      <h1 className="text-xl font-semibold">Add a new property</h1>
+      <h1 className="text-xl font-bold">Add a new property</h1>
       <hr />
       <form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-6">

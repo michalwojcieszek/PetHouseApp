@@ -23,7 +23,7 @@ const PropertyCardPets = ({
   return (
     <li className={`flex flex-row items-center gap-3`}>
       {petView && (
-        <Image src={petView?.icon} alt={petView?.type} width={25} height={25} />
+        <Image src={petView?.icon} alt={petView?.type} width={35} height={35} />
       )}
       <span className="text-theme-color font-semibold text-base">
         {petInfo ? `${petAccepted[petInfo]}` : `${petAccepted.type}s`}

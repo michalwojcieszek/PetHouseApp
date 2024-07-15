@@ -3,7 +3,6 @@
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
 import { useRouter } from "next/navigation";
-// import SearchBox from "./SearchBox";
 import Container from "../Container";
 import { CurrentUserType } from "@/types";
 import UserImg from "../UserImg";

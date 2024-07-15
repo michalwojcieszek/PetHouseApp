@@ -1,9 +1,9 @@
 "use client";
 
 import { CurrentUserType, PropertyType, UserType } from "@/types";
-import Sidebar from "./sidebar/Sidebar";
 import SingleProperty from "./property/SingleProperty";
 import PropertiesGrid from "./PropertiesGrid";
+import PropertySidebarInput from "./PropertySidebarInput";
 
 type PropertiesOnly = {
   propertiesHeader: string;
@@ -15,28 +15,36 @@ type MainContentOnly = {
   propertiesHeader?: string;
   properties?: PropertyType[];
   property: PropertyType;
-  ownerUser: UserType;
 };
 
 type ScreenGridProps = {
-  sidebarInput: React.ComponentType;
+  ownerUser?: UserType | undefined;
   sidebarHeader: string;
-  currentUserFavourites?: string[];
+  currentUser?: CurrentUserType;
 } & (PropertiesOnly | MainContentOnly);
 
 const ScreenGrid = ({
   properties,
-  sidebarInput,
   sidebarHeader,
   propertiesHeader,
   property,
   ownerUser,
-  currentUserFavourites,
+  currentUser,
 }: ScreenGridProps) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-30/70 lg:gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-30/70 lg:gap-10">
       <div className={property ? `row-start-2 lg:row-start-1` : ""}>
-        <Sidebar sidebarInput={sidebarInput} sidebarHeader={sidebarHeader} />
+        <div className="px-10 border-r-[1px] flex flex-col gap-5 py-4">
+          <h2 className="text-xl font-semibold">{sidebarHeader}</h2>
+          {properties &&
+          properties.length > 0 &&
+          propertiesHeader ? null : property ? (
+            <PropertySidebarInput
+              currentUser={currentUser}
+              property={property}
+            />
+          ) : null}
+        </div>
       </div>
       <div className="">
         <div className="flex flex-col gap-3 py-4">
@@ -44,14 +52,16 @@ const ScreenGrid = ({
             <PropertiesGrid
               properties={properties}
               propertiesHeader={propertiesHeader}
-              currentUserFavourites={currentUserFavourites}
+              currentUserFavourites={currentUser?.favourites}
             />
-          ) : property ? (
-            <SingleProperty
-              property={property}
-              ownerUser={ownerUser}
-              currentUserFavourites={currentUserFavourites}
-            />
+          ) : property && ownerUser ? (
+            <>
+              <SingleProperty
+                property={property}
+                ownerUser={ownerUser}
+                currentUserFavourites={currentUser?.favourites}
+              />
+            </>
           ) : null}
         </div>
       </div>

@@ -95,7 +95,7 @@ const SingleProperty = ({
                 <div className="flex gap-2 items-center">
                   <FlagImg code={state.code} name={state.name} />
                   <p>
-                    {street}, {zipcode} {city} {state.name}
+                    {street}, {zipcode} {city}, {state.name}
                   </p>
                 </div>
               </FeaturesFlexCol>
