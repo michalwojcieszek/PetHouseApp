@@ -3,6 +3,7 @@ import { getUserById } from "@/app/actions/getUserById";
 import ClientProvider from "@/components/ClientProvider";
 import ScreenGrid from "@/components/ScreenGrid";
 import connectDB from "@/config/database";
+import Booking from "@/models/Booking";
 import Property from "@/models/Property";
 
 type IParams = {
@@ -18,6 +19,8 @@ const PropertyPage = async ({ params }: { params: IParams }) => {
   const property = JSON.parse(JSON.stringify(propertyNotJSON));
   const ownerUser = await getUserById(property.owner);
   const currentUser = await getUser();
+  const bookingsNotJSON = await Booking.find();
+  const bookings = JSON.parse(JSON.stringify(bookingsNotJSON));
 
   return (
     <ClientProvider>
@@ -26,6 +29,7 @@ const PropertyPage = async ({ params }: { params: IParams }) => {
         property={property}
         ownerUser={ownerUser}
         currentUser={currentUser}
+        bookings={bookings}
       />
     </ClientProvider>
   );

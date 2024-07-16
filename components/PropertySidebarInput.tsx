@@ -1,23 +1,29 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
 import useLogin from "@/hooks/useLogin";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { CurrentUserType, PetType, PropertyType } from "@/types";
+import { BookingType, CurrentUserType, PetType, PropertyType } from "@/types";
 import Calendar from "@/components/Calendar";
 import Image from "next/image";
 import BookingPetCounter from "./BookingPetCounter";
 import Header3 from "./Header3";
 import Button from "./Button";
 import Loader from "./Loader";
-import { count } from "console";
+
+type DayBookedDetails = {
+  day: Date;
+  petsNumber: number;
+  petType: string;
+};
 
 type PropertySidebarInputProps = {
   currentUser?: CurrentUserType;
   property: PropertyType;
+  bookings: BookingType[];
 };
 
 export const initialDateRange = {
@@ -29,6 +35,7 @@ export const initialDateRange = {
 const PropertySidebarInput = ({
   currentUser,
   property,
+  bookings,
 }: PropertySidebarInputProps) => {
   const petsAccepted = property.pets.filter((pet) => pet.accept === true);
 
@@ -40,15 +47,34 @@ const PropertySidebarInput = ({
   const [totalPrice, setTotalPrice] = useState<number | null>(0);
   const [dateRange, setDateRange] = useState(initialDateRange);
 
-  const bookings: any = [];
-
   const handleClickPet = (pet: PetType) => {
+    if (!currentUser) {
+      openLogin();
+      return;
+    }
+
     if (clickedPet === pet) {
       setClickedPet(null);
     } else {
       setClickedPet(pet);
     }
   };
+
+  function summarizeDaysBooked(arr: DayBookedDetails[]) {
+    const summary: { [key: string]: DayBookedDetails } = {};
+
+    arr.forEach((item: DayBookedDetails) => {
+      const date = item.day.toDateString(); // Convert date to a comparable format
+
+      if (summary[date]) {
+        summary[date].petsNumber += item.petsNumber;
+      } else {
+        summary[date] = { ...item, petsNumber: item.petsNumber };
+      }
+    });
+
+    return Object.values(summary);
+  }
 
   const isCalendarDisabled = useMemo(() => {
     if (!clickedPet) {
@@ -59,17 +85,40 @@ const PropertySidebarInput = ({
   }, [clickedPet]);
 
   const disabledDates = useMemo(() => {
-    let dates: Date[] = [];
+    // let dates: Date[] = [];
+    let datesArr: DayBookedDetails[] = [];
+    if (!clickedPet) return;
 
-    bookings.forEach((booking: any) => {
+    const bookingsOfSelectedPet = bookings.filter(
+      (booking) => booking.pet.type === clickedPet.type
+    );
+
+    bookingsOfSelectedPet.forEach((booking: BookingType) => {
       const range = eachDayOfInterval({
-        start: new Date(booking.startDate),
-        end: new Date(booking.endDate),
+        start: new Date(booking.dates.startDate),
+        end: new Date(booking.dates.endDate),
       });
-      dates = [...dates, ...range];
+      range.forEach((day: Date) => {
+        datesArr = [
+          ...datesArr,
+          { day, petsNumber: booking.pet.count, petType: booking.pet.type },
+        ];
+      });
     });
-    return dates;
-  }, [bookings]);
+    const summarizedDays = summarizeDaysBooked(datesArr);
+    console.log(datesArr);
+    console.log(summarizedDays);
+    const datesDisabled = summarizedDays
+      .filter((el: DayBookedDetails) => {
+        console.log(el);
+        if (clickedPet.capacity - el.petsNumber < bookingPetCount) {
+          return el.day;
+        }
+      })
+      .map((el: any) => el.day);
+    console.log(datesDisabled);
+    return datesDisabled;
+  }, [bookings, clickedPet, bookingPetCount]);
 
   useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {
@@ -86,12 +135,6 @@ const PropertySidebarInput = ({
   }, [dateRange.startDate, dateRange.endDate, bookingPetCount, clickedPet]);
 
   const createBooking = async () => {
-    console.log("check");
-    if (!currentUser) {
-      openLogin();
-      return;
-    }
-
     if (!clickedPet || !bookingPetCount || !dateRange) {
       toast.error("Some data is missing");
       return;
@@ -105,9 +148,18 @@ const PropertySidebarInput = ({
     try {
       await axios.post("/api/bookings", {
         totalPrice,
-        startDate: dateRange.startDate,
-        endDate: dateRange.endDate,
-        propertyId: property?._id,
+        dates: {
+          startDate: dateRange.startDate,
+          endDate: dateRange.endDate,
+        },
+        property: property?._id,
+        user: currentUser?._id,
+        pet: {
+          type: clickedPet.type,
+          capacity: property.pets.find((pet) => pet.type === clickedPet.type)
+            ?.capacity,
+          count: bookingPetCount,
+        },
       });
       toast.success("Booking created!");
       setDateRange(initialDateRange);
@@ -188,6 +240,7 @@ const PropertySidebarInput = ({
         action={createBooking}
         type="button"
         primary
+        disabled={isCalendarDisabled}
       />
     </div>
   );

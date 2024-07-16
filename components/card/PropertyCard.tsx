@@ -6,7 +6,7 @@ import PropertyCardPets from "./PropertyCardPets";
 import FlagImg from "../FlagImg";
 import PropertyImg from "../PropertyImg";
 import AddToFavourite from "../AddToFavourite";
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Loader from "../Loader";
@@ -22,7 +22,7 @@ const PropertyCard = ({
   property: PropertyType;
   currentUserId?: string;
   currentUserFavourites?: string[];
-  additionalInfo?: string;
+  additionalInfo?: () => React.ReactNode;
   type?: string;
 }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -69,7 +69,7 @@ const PropertyCard = ({
       className="rounded-md shadow-[0_0px_8px_-0px_rgba(0,0,0,0.07)] cursor-pointer flex lg:flex-row lg:gap-3 flex-col"
       onClick={() => router.push(`/property/${property._id}`)}
     >
-      <div className="overflow-hidden lg:w-60 rounded-t-md lg:rounded-l-md lg:rounded-tr-none relative">
+      <div className="overflow-hidden lg:w-64 rounded-t-md lg:rounded-l-md lg:rounded-tr-none relative">
         <PropertyImg
           src={property.image}
           alt={property.name}
@@ -95,16 +95,19 @@ const PropertyCard = ({
             {location.state.name}
           </p>
         </div>
-        <div className="flex flex-col gap-2">
-          <p className="flex flex-col gap-2 text-theme-color font-semibold">
-            Accepting:
-          </p>
-          <ul className="flex flex-row gap-5">
-            {petsAccepted.map((petAccepted, index) => (
-              <PropertyCardPets key={index} petAccepted={petAccepted} />
-            ))}
-          </ul>
-        </div>
+        {!additionalInfo && (
+          <div className="flex flex-col gap-2">
+            <p className="flex flex-col gap-2 text-theme-color font-semibold">
+              Accepting:
+            </p>
+            <ul className="flex flex-row gap-5">
+              {petsAccepted.map((petAccepted, index) => (
+                <PropertyCardPets key={index} petAccepted={petAccepted} />
+              ))}
+            </ul>
+          </div>
+        )}
+        {additionalInfo}
         {/* <p>
           {location.street}, {location.zipcode} {location.city} -{" "}
           {location.state.name}
@@ -123,6 +126,13 @@ const PropertyCard = ({
           <div>
             <RemoveButton onClick={handleDeleteOwnProperty}>
               Delete property
+            </RemoveButton>
+          </div>
+        )}
+        {!isLoading && type === "bookings" && (
+          <div>
+            <RemoveButton onClick={handleDeleteOwnProperty}>
+              Cancel booking
             </RemoveButton>
           </div>
         )}

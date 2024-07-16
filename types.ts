@@ -44,3 +44,18 @@ export type UserType = {
 export type CurrentUserType = UserType & {
   image?: string;
 };
+
+export type BookingType = {
+  _id: string;
+  property: string;
+  pet: {
+    type: string;
+    capacity: number;
+    count: number;
+  };
+  dates: {
+    startDate: string;
+    endDate: string;
+  };
+  totalPrice: number;
+};

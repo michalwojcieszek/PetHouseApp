@@ -13,26 +13,27 @@ const BookingSchema = new Schema(
       reqired: true,
     },
     pet: {
-      species: {
+      type: {
         type: String,
+        enum: ["dog", "cat", "parrot", "hamster", "snake"],
         required: true,
       },
-      number: {
+      capacity: {
+        type: Number,
+        required: true,
+      },
+      count: {
         type: Number,
         required: true,
       },
     },
-    stay: {
+    dates: {
       startDate: {
         type: String,
         required: true,
       },
       endDate: {
         type: String,
-        required: true,
-      },
-      number: {
-        type: Number,
         required: true,
       },
     },

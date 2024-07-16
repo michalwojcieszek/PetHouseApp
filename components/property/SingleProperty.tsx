@@ -46,7 +46,8 @@ const SingleProperty = ({
         <Header2>{property.description}</Header2>
       </div>
       <div className="flex flex-col md:flex-row gap-6">
-        <div className="overflow-hidden rounded-md w-full md:w-2/3 xl:w-1/2 2xl:w-2/5 flex items-center justify-center lg:justify-start shrink-0 relative">
+        {/* <div className="overflow-hidden rounded-md w-full md:w-2/3 xl:w-1/2 2xl:w-96 flex items-center justify-center lg:justify-start relative"> */}
+        <div className="relative overflow-hidden rounded-md w-full md:w-96">
           <PropertyImg
             src={property.image}
             alt={property.name}
