@@ -14,16 +14,16 @@ import RemoveButton from "../RemoveButton";
 
 const PropertyCard = ({
   property,
-  currentUserId,
   currentUserFavourites,
   additionalInfo,
   type,
+  bookingId,
 }: {
   property: PropertyType;
-  currentUserId?: string;
   currentUserFavourites?: string[];
-  additionalInfo?: () => React.ReactNode;
+  additionalInfo?: React.ReactNode;
   type?: string;
+  bookingId?: string;
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -64,6 +64,22 @@ const PropertyCard = ({
     }
   };
 
+  const handleDeleteBooking = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.stopPropagation();
+    try {
+      setIsLoading(true);
+      const { data } = await axios.delete(`/api/bookings/${bookingId}`);
+      toast.success(data.message);
+      router.refresh();
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div
       className="rounded-md shadow-[0_0px_8px_-0px_rgba(0,0,0,0.07)] cursor-pointer flex lg:flex-row lg:gap-3 flex-col"
@@ -91,7 +107,7 @@ const PropertyCard = ({
             name={property.location.state.name}
           />
           <p>
-            {location.street}, {location.zipcode} {location.city} -{" "}
+            {location.street}, {location.zipcode} {location.city},{" "}
             {location.state.name}
           </p>
         </div>
@@ -131,7 +147,7 @@ const PropertyCard = ({
         )}
         {!isLoading && type === "bookings" && (
           <div>
-            <RemoveButton onClick={handleDeleteOwnProperty}>
+            <RemoveButton onClick={handleDeleteBooking}>
               Cancel booking
             </RemoveButton>
           </div>

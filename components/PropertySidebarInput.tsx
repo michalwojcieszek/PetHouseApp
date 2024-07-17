@@ -154,6 +154,7 @@ const PropertySidebarInput = ({
         },
         property: property?._id,
         user: currentUser?._id,
+        propertyOwner: property?.owner,
         pet: {
           type: clickedPet.type,
           capacity: property.pets.find((pet) => pet.type === clickedPet.type)

@@ -16,6 +16,10 @@ const LoggedMenu = () => {
         Your properties
       </MenuItem>
       <hr />
+      <MenuItem action={() => router.push("/properties/bookings")}>
+        Your properties bookings
+      </MenuItem>
+      <hr />
       <MenuItem action={() => router.push("/favourites")}>
         Your favourites
       </MenuItem>

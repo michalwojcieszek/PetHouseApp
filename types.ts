@@ -48,6 +48,7 @@ export type CurrentUserType = UserType & {
 export type BookingType = {
   _id: string;
   property: string;
+  propertyOwner: string;
   pet: {
     type: string;
     capacity: number;

@@ -12,6 +12,11 @@ const BookingSchema = new Schema(
       ref: "Property",
       reqired: true,
     },
+    propertyOwner: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      reqired: true,
+    },
     pet: {
       type: {
         type: String,

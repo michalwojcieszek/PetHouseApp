@@ -8,6 +8,7 @@ const OwnProperties = async () => {
       <PropertiesGrid
         properties={ownProperties}
         propertiesHeader="Your properties"
+        propertiesSecondaryHeader="All of properties added by you"
         type="own"
       />
     </div>

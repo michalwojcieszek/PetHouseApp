@@ -7,11 +7,11 @@ export async function POST(req: Request, res: NextResponse) {
     await connectDB();
 
     const body = await req.json();
-    const { totalPrice, dates, property, user, pet } = body;
+    const { totalPrice, dates, property, user, pet, propertyOwner } = body;
 
     let message;
 
-    if (!totalPrice || !dates || !property || !user || !pet) {
+    if (!totalPrice || !dates || !property || !user || !pet || !propertyOwner) {
       return new NextResponse("Missing booking data", { status: 400 });
     }
 
