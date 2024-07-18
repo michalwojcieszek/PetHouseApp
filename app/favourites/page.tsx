@@ -11,6 +11,7 @@ const FavouritesPage = async () => {
       <PropertiesGrid
         properties={favouriteProperties}
         propertiesHeader="Favourite properties"
+        propertiesSecondaryHeader="Properties you have marked as favourites"
         type="favourites"
       />
     </div>

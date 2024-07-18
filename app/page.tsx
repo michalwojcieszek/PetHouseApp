@@ -22,7 +22,7 @@ const HomePage = async () => {
   return (
     <ClientProvider>
       <ScreenGrid
-        sidebarHeader="Find accomodation for your pet!"
+        sidebarHeader="Find accomodation on the map!"
         propertiesHeader="Properties available:"
         properties={properties}
         currentUser={currentUser}

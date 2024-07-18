@@ -114,6 +114,7 @@ const AddPropertyForm = () => {
         await axios.post("/api/properties", dataToBackend);
         toast.success("New property successfully created");
         router.push("/");
+        router.refresh();
       } catch (error) {
         toast.error("Creating new property failed");
       } finally {

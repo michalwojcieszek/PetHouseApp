@@ -30,7 +30,7 @@ const additionalInfoHTML = (booking: any) => {
 type PropertiesGridType = {
   properties?: PropertyType[];
   propertiesHeader: string;
-  propertiesSecondaryHeader: string;
+  propertiesSecondaryHeader?: string;
   currentUserFavourites?: string[];
   additionalInfo?: string;
   type?: string;
@@ -43,12 +43,11 @@ const PropertiesGrid = ({
   propertiesHeader,
   propertiesSecondaryHeader,
   currentUserFavourites,
-  additionalInfo,
   type,
 }: PropertiesGridType) => {
   return (
-    <>
-      <div className="flex flex-col gap-2 mb-4">
+    <div>
+      <div className="flex flex-col gap-2 mb-2">
         <h2 className="text-2xl font-semibold">{propertiesHeader}</h2>
         <h3>{propertiesSecondaryHeader}</h3>
       </div>
@@ -116,7 +115,7 @@ const PropertiesGrid = ({
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 };
 export default PropertiesGrid;

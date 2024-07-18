@@ -20,7 +20,7 @@ type DayBookedDetails = {
   petType: string;
 };
 
-type PropertySidebarInputProps = {
+type PropertySidebarProps = {
   currentUser?: CurrentUserType;
   property: PropertyType;
   bookings: BookingType[];
@@ -32,11 +32,11 @@ export const initialDateRange = {
   key: "selection",
 };
 
-const PropertySidebarInput = ({
+const PropertySidebar = ({
   currentUser,
   property,
   bookings,
-}: PropertySidebarInputProps) => {
+}: PropertySidebarProps) => {
   const petsAccepted = property.pets.filter((pet) => pet.accept === true);
 
   const { open: openLogin } = useLogin();
@@ -246,4 +246,4 @@ const PropertySidebarInput = ({
     </div>
   );
 };
-export default PropertySidebarInput;
+export default PropertySidebar;

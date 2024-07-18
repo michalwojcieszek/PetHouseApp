@@ -9,6 +9,11 @@
   z-index: 0 !important;
 }
 
+.leaflet-popup-content-wrapper,
+.leaflet-popup-content {
+  font-family: "Nunito", sans-serif;
+}
+
 body {
   color: #495057;
 }

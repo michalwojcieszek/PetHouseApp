@@ -9,7 +9,7 @@ import "leaflet/dist/leaflet.css";
 import { CountryType } from "../addProperty/SelectCountry";
 import FlagImg from "../FlagImg";
 
-type MapProps = {
+type PropertyMapProps = {
   cords: {
     lat: number;
     lng: number;
@@ -26,7 +26,13 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow.src,
 });
 
-const Map = ({ cords, street, zipcode, city, state }: MapProps) => {
+const PropertyMap = ({
+  cords,
+  street,
+  zipcode,
+  city,
+  state,
+}: PropertyMapProps) => {
   const { lat, lng } = cords;
   return (
     // <div className="w-full">
@@ -60,7 +66,6 @@ const Map = ({ cords, street, zipcode, city, state }: MapProps) => {
         </Popup>
       </Marker>
     </MapContainer>
-    // </div>
   );
 };
-export default Map;
+export default PropertyMap;

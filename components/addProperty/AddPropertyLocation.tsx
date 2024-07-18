@@ -7,7 +7,9 @@ import { IoMapOutline } from "react-icons/io5";
 import SelectCountry, { CountryType } from "./SelectCountry";
 import dynamic from "next/dynamic";
 
-const Map = dynamic(() => import("@/components/map/Map"), { ssr: false });
+const Map = dynamic(() => import("@/components/map/PropertyMap"), {
+  ssr: false,
+});
 
 type AddPropertyLocationType = {
   register: UseFormRegister<FieldValues>;

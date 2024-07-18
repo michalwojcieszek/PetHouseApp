@@ -1,5 +1,6 @@
 import getUser from "@/app/actions/getAuthUser";
 import connectDB from "@/config/database";
+import Booking from "@/models/Booking";
 import Property from "@/models/Property";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
@@ -27,6 +28,8 @@ export async function DELETE(
     const property = await Property.findOne({ _id: propertyId });
 
     if (!property) return NextResponse.error();
+
+    await Booking.deleteMany({ property: propertyId });
 
     await property.deleteOne();
     const message = "Property successfully deleted";

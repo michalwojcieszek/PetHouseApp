@@ -24,11 +24,12 @@ const LoggedMenu = () => {
         Your favourites
       </MenuItem>
       <hr />
-      <MenuItem action={() => router.push("/properties/add")}>
+      <MenuItem action={() => router.push("/properties/add")} highlightPrimary>
         Add new property
       </MenuItem>
       <hr />
       <MenuItem
+        highlightSecondary
         action={() => {
           signOut();
           toast.success("Signed out successfully");

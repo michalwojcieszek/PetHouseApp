@@ -3,7 +3,9 @@
 import { BookingType, CurrentUserType, PropertyType, UserType } from "@/types";
 import SingleProperty from "./property/SingleProperty";
 import PropertiesGrid from "./PropertiesGrid";
-import PropertySidebarInput from "./PropertySidebarInput";
+import PropertySidebarInput from "./PropertySidebar";
+import PropertySidebar from "./PropertySidebar";
+import PropertiesSidebar from "./PropertiesSidebar";
 
 type ScreenGridProps = {
   propertiesHeader?: string;
@@ -29,10 +31,10 @@ const ScreenGrid = ({
       <div className={property ? `row-start-2 xl:row-start-1` : ""}>
         <div className="xl:px-10 flex flex-col gap-5 py-4">
           <h2 className="text-xl font-semibold">{sidebarHeader}</h2>
-          {properties &&
-          properties.length > 0 &&
-          propertiesHeader ? null : property && bookings ? (
-            <PropertySidebarInput
+          {properties && properties.length > 0 && propertiesHeader ? (
+            <PropertiesSidebar properties={properties} />
+          ) : property && bookings ? (
+            <PropertySidebar
               currentUser={currentUser}
               property={property}
               bookings={bookings}

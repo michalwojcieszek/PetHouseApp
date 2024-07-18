@@ -29,7 +29,7 @@ const SingleProperty = ({
 
   const Map = useMemo(
     () =>
-      dynamic(() => import("../map/Map"), {
+      dynamic(() => import("../map/PropertyMap"), {
         ssr: false,
       }),
     [cords.lat, cords.lng]
