@@ -4,28 +4,27 @@ import ClientProvider from "@/components/ClientProvider";
 import ScreenGrid from "@/components/ScreenGrid";
 import getUser from "./actions/getAuthUser";
 import { getUserById } from "./actions/getUserById";
+import getProperties, { IPropertiesParams } from "./actions/getProperties";
 
-const HomePage = async () => {
-  await connectDB();
-  const propertiesNotJSON = await Property.find({});
-  //fixing error 'Only plain objects can be passed to Client Components from Server Components'
-  const properties = JSON.parse(JSON.stringify(propertiesNotJSON));
+type HomePageParams = {
+  searchParams: IPropertiesParams;
+};
+
+const HomePage = async ({ searchParams }: HomePageParams) => {
   const currentUser = await getUser();
+  const properties = await getProperties(searchParams);
 
-  if (!properties || properties.length === 0)
-    return (
-      <ClientProvider>
-        <p>empty</p>
-      </ClientProvider>
-    );
+  const { pet, country } = searchParams;
+  console.log(pet, country);
 
   return (
     <ClientProvider>
       <ScreenGrid
-        sidebarHeader="Find accomodation on the map!"
+        sidebarHeader="Help your search!"
         propertiesHeader="Properties available:"
         properties={properties}
         currentUser={currentUser}
+        type="properties"
       />
     </ClientProvider>
   );

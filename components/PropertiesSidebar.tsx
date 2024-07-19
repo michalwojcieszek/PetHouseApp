@@ -2,17 +2,69 @@
 
 import { PropertyType } from "@/types";
 import PropertiesMap from "./map/PropertiesMap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { pets, PetViewProps } from "@/utils/petsAccepted";
 import Image from "next/image";
-import SelectCountry from "./addProperty/SelectCountry";
+import SelectCountry, { CountryType } from "./addProperty/SelectCountry";
+import { useRouter, useSearchParams } from "next/navigation";
+import qs from "query-string";
+import {
+  MdFilterAltOff,
+  MdOutlineFilterAlt,
+  MdOutlineLocationOn,
+} from "react-icons/md";
+
+type QueryParams = {
+  pet?: string | string[];
+  [key: string]: any; // This allows additional properties
+};
 
 type PropertiesSidebarProps = {
   properties: PropertyType[];
 };
 
 const PropertiesSidebar = ({ properties }: PropertiesSidebarProps) => {
+  const router = useRouter();
+  const params = useSearchParams();
+
   const [acceptedPets, setAcceptedPets] = useState<string[]>([]);
+  const [selectedCountry, setSelectedCountry] = useState<CountryType>();
+
+  const clearFiltersHandler = () => {
+    setAcceptedPets([]);
+    setSelectedCountry(undefined);
+  };
+
+  useEffect(() => {
+    let currentQuery: QueryParams = {};
+    console.log(acceptedPets);
+
+    if (params) {
+      currentQuery = qs.parse(params.toString()) as QueryParams;
+    }
+
+    if (acceptedPets.length > 0) {
+      currentQuery.pet = acceptedPets;
+    } else {
+      delete currentQuery.pet;
+    }
+
+    if (selectedCountry) {
+      currentQuery.country = selectedCountry.code;
+    } else {
+      delete currentQuery.country;
+    }
+
+    const url = qs.stringifyUrl(
+      {
+        url: "/",
+        query: currentQuery,
+      },
+      { skipNull: true }
+    );
+
+    router.push(url);
+  }, [acceptedPets, selectedCountry, router, params]);
 
   const handleClickPet = (pet: PetViewProps) => {
     if (acceptedPets.includes(pet.type)) {
@@ -26,16 +78,13 @@ const PropertiesSidebar = ({ properties }: PropertiesSidebarProps) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="mb-4">
-        <PropertiesMap properties={properties} />
+      <div className="flex gap-2 items-center">
+        <MdOutlineFilterAlt />
+        <h3 className="text-lg font-semibold">Filter the properties</h3>
       </div>
-      <hr />
-      <div>
-        {" "}
-        <h2 className="text-xl font-semibold">Select your requirements</h2>
-      </div>
-      <div>
-        <ul className="flex flex-row gap-8 mb-6">
+      <div className="flex flex-col gap-3">
+        <h4>Select the pets</h4>
+        <ul className="flex flex-row xl:justify-between gap-4 xl:gap-0">
           {pets.map((pet, index) => (
             <li
               key={index}
@@ -52,10 +101,32 @@ const PropertiesSidebar = ({ properties }: PropertiesSidebarProps) => {
           ))}
         </ul>
       </div>
-      <div>
-        <SelectCountry />
+      <div className="flex flex-col gap-3">
+        <h4>Select the country</h4>
+        <SelectCountry onChange={setSelectedCountry} value={selectedCountry} />
       </div>
-      <div>Nightly Price to choose</div>
+      <button
+        onClick={clearFiltersHandler}
+        disabled={acceptedPets.length < 1 && !selectedCountry}
+        className={`rounded-md py-4 text-xl hover:opacity-80 text-white tracking-wide flex gap-2 items-center justify-center ${
+          acceptedPets.length < 1 && !selectedCountry
+            ? "bg-gray-300 cursor-not-allowed"
+            : "bg-red-500"
+        }`}
+      >
+        <p>
+          <MdFilterAltOff />
+        </p>
+        <p>Clear filters</p>
+      </button>
+      <hr />
+      <div className="flex flex-col gap-4">
+        <div className="flex gap-2 items-center">
+          <MdOutlineLocationOn />
+          <h3 className="text-lg font-semibold">Find property on the map</h3>
+        </div>
+        <PropertiesMap properties={properties} />
+      </div>
     </div>
   );
 };

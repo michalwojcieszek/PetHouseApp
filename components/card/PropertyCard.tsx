@@ -153,9 +153,11 @@ const PropertyCard = ({
           </div>
         )}
         {!isLoading && !type && (
-          <button className="font-semibold bg-theme-color rounded-md py-1 w-1/3 text-white hover:opacity-80 tracking-wid mt-auto">
-            Details
-          </button>
+          <div className="">
+            <button className="font-semibold bg-theme-color rounded-md py-2 px-8 text-white hover:opacity-80 tracking-wider mt-auto w-full lg:w-auto">
+              Details
+            </button>
+          </div>
         )}
       </div>
     </div>

@@ -21,9 +21,9 @@ const PropertyCardPets = ({
   const petView = pets.find((pet) => pet.type === petAccepted.type);
 
   return (
-    <li className={`flex flex-row items-center gap-3`}>
+    <li className={`flex flex-col md:flex-row items-center gap-2`}>
       {petView && (
-        <Image src={petView?.icon} alt={petView?.type} width={35} height={35} />
+        <Image src={petView?.icon} alt={petView?.type} width={25} height={25} />
       )}
       <span className="text-theme-color font-semibold text-base">
         {petInfo ? `${petAccepted[petInfo]}` : `${petAccepted.type}s`}

@@ -30,6 +30,7 @@ const PropertyPage = async ({ params }: { params: IParams }) => {
         ownerUser={ownerUser}
         currentUser={currentUser}
         bookings={bookings}
+        type="property"
       />
     </ClientProvider>
   );

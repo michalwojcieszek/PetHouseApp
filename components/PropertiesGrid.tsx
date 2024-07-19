@@ -4,6 +4,7 @@ import { PropertyType } from "@/types";
 import PropertyCard from "./card/PropertyCard";
 import Link from "next/link";
 import { format } from "date-fns";
+import { useRouter } from "next/navigation";
 
 const additionalInfoHTML = (booking: any) => {
   return (
@@ -45,6 +46,8 @@ const PropertiesGrid = ({
   currentUserFavourites,
   type,
 }: PropertiesGridType) => {
+  const router = useRouter();
+
   return (
     <div>
       <div className="flex flex-col gap-2 mb-2">
@@ -89,7 +92,7 @@ const PropertiesGrid = ({
           </div>
         )}
       {properties && properties.length > 0 && (
-        <ul className="flex flex-col gap-10">
+        <ul className="flex flex-col gap-6">
           {properties.map((property: PropertyType) => (
             <PropertyCard
               key={property._id}
@@ -101,8 +104,15 @@ const PropertiesGrid = ({
           ))}
         </ul>
       )}
+      {!properties ||
+        (properties.length === 0 && (
+          <div className="flex flex-col gap-1">
+            <p>There are no properties matching this search</p>
+            <p>Try to clear all the filters</p>
+          </div>
+        ))}
       {bookedProperties && bookedProperties.length > 0 && (
-        <ul className="flex flex-col gap-10">
+        <ul className="flex flex-col gap-6">
           {bookedProperties.map((bookedProperty: any) => (
             <PropertyCard
               key={bookedProperty._id}

@@ -20,7 +20,7 @@ const Button = ({
     <button
       onClick={action}
       type={type}
-      className={`w-full rounded-md py-4 text-xl hover:opacity-80 ${
+      className={`w-full tracking-wide rounded-md py-4 text-xl hover:opacity-80 ${
         primary ? "bg-theme-color text-white" : "border-2 border-black"
       } ${disabled ? "cursor-not-allowed" : ""}`}
       disabled={disabled}
