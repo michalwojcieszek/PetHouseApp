@@ -2,9 +2,8 @@
 
 import { PropertyType } from "@/types";
 import PropertyCard from "./card/PropertyCard";
-import Link from "next/link";
 import { format } from "date-fns";
-import { useRouter } from "next/navigation";
+import NotFound from "./NotFound";
 
 const additionalInfoHTML = (booking: any) => {
   return (
@@ -46,51 +45,51 @@ const PropertiesGrid = ({
   currentUserFavourites,
   type,
 }: PropertiesGridType) => {
-  const router = useRouter();
-
   return (
     <div>
       <div className="flex flex-col gap-2 mb-2">
         <h2 className="text-2xl font-semibold">{propertiesHeader}</h2>
         <h3>{propertiesSecondaryHeader}</h3>
       </div>
+      {/* FAVOURITES */}
       {(!properties || properties.length === 0) && type === "favourites" && (
-        <div className="flex flex-col gap-1">
-          <p>No favourite properties found</p>
-          <Link
-            href="/"
-            className="underline underline-offset-4 hover:no-underline transition"
-          >
-            &rarr; Go to add some to favourites
-          </Link>
-        </div>
+        <NotFound
+          primaryText="favourite properties"
+          secondaryText="Go to add some to favourites"
+          href="/"
+        />
       )}
+      {/* BOOKED */}
       {(!bookedProperties || bookedProperties.length === 0) &&
         type === "bookings" &&
         !properties && (
-          <div className="flex flex-col gap-1">
-            <p>No bookings found</p>
-            <Link
-              href="/"
-              className="underline underline-offset-4 hover:no-underline transition"
-            >
-              &rarr; Find a property
-            </Link>
-          </div>
+          <NotFound
+            primaryText="bookings"
+            secondaryText="Find a property to book"
+            href="/"
+          />
         )}
+      {/* OWN PROPERTIES BOOKINGS */}
+      {(!bookedProperties || bookedProperties.length === 0) &&
+        type === "ownPropertiesBookings" &&
+        !properties && (
+          <NotFound
+            primaryText="property owned by you has been booked"
+            secondaryText="Go to the main page"
+            href="/"
+          />
+        )}
+      {/* OWN PROPERTIES */}
       {(!properties || properties.length === 0) &&
         type === "own" &&
         !bookedProperties && (
-          <div className="flex flex-col gap-1">
-            <p>Currently you have no own properties</p>
-            <Link
-              href="/properties/add"
-              className="underline underline-offset-4 hover:no-underline transition"
-            >
-              &rarr; Go to add your property
-            </Link>
-          </div>
+          <NotFound
+            primaryText="property owned by you"
+            secondaryText="Go to add your property"
+            href="/properties/add"
+          />
         )}
+      {/* ALL PROPERTIES */}
       {properties && properties.length > 0 && (
         <ul className="flex flex-col gap-6">
           {properties.map((property: PropertyType) => (
@@ -98,7 +97,6 @@ const PropertiesGrid = ({
               key={property._id}
               property={property}
               currentUserFavourites={currentUserFavourites}
-              // additionalInfo={additionalInfo}
               type={type}
             />
           ))}

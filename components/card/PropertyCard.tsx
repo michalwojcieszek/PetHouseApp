@@ -11,6 +11,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import Loader from "../Loader";
 import RemoveButton from "../RemoveButton";
+import Spinner from "../Spinner";
 
 const PropertyCard = ({
   property,
@@ -129,7 +130,7 @@ const PropertyCard = ({
           {location.state.name}
         </p> */}
 
-        {isLoading && <Loader />}
+        {isLoading && <Spinner />}
 
         {!isLoading && type === "favourites" && (
           <div>

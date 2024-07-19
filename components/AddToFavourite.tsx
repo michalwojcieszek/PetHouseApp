@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import Loader from "./Loader";
+import Spinner from "./Spinner";
 
 type AddToFavouriteProps = {
   currentPropertyId: string;
@@ -48,7 +48,7 @@ const AddToFavourite = ({
   return (
     <div className="absolute top-2 right-2">
       {isLoading ? (
-        <Loader />
+        <Spinner />
       ) : (
         <div
           className="bg-white hover:text-red-600 transition p-1 rounded-full cursor-pointer "

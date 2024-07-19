@@ -7,6 +7,12 @@ import ClientProvider from "@/components/ClientProvider";
 import Container from "@/components/Container";
 import ToasterProvider from "@/providers/ToastProvider";
 import getUser from "./actions/getAuthUser";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "PetHouse",
+  description: "Find accommodation for your pet!",
+};
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -19,6 +25,9 @@ const MainLayout = async ({ children }: MainLayoutProps) => {
 
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/images/favicon.png" />
+      </head>
       <body className={font.className}>
         <ClientProvider>
           <ToasterProvider />

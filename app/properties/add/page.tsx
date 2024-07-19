@@ -1,10 +1,14 @@
 import getUser from "@/app/actions/getAuthUser";
 import ClientProvider from "@/components/ClientProvider";
+import NotAuthorized from "@/components/NotAuthorized";
 import AddPropertyForm from "@/components/addProperty/AddPropertyForm";
 
 const NewProperty = async () => {
-  // const currentUserNotJSON = await getUser();
-  // const currentUser = JSON.parse(JSON.stringify(currentUserNotJSON));
+  const currentUser = await getUser();
+
+  if (!currentUser) {
+    return <NotAuthorized text="add a new property" />;
+  }
 
   return (
     <ClientProvider>

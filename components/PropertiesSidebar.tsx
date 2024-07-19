@@ -108,7 +108,7 @@ const PropertiesSidebar = ({ properties }: PropertiesSidebarProps) => {
       <button
         onClick={clearFiltersHandler}
         disabled={acceptedPets.length < 1 && !selectedCountry}
-        className={`rounded-md py-4 text-xl hover:opacity-80 text-white tracking-wide flex gap-2 items-center justify-center ${
+        className={`rounded-md p-2 text-xl hover:opacity-80 text-white tracking-wide flex gap-2 items-center justify-center ${
           acceptedPets.length < 1 && !selectedCountry
             ? "bg-gray-300 cursor-not-allowed"
             : "bg-red-500"
