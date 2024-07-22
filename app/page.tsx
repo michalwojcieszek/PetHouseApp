@@ -15,7 +15,6 @@ const HomePage = async ({ searchParams }: HomePageParams) => {
   const properties = await getProperties(searchParams);
 
   const { pet, country } = searchParams;
-  console.log(pet, country);
 
   return (
     <ClientProvider>

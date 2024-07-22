@@ -9,7 +9,6 @@ export type IPropertiesParams = {
 export default async function getProperties(params: IPropertiesParams) {
   await connectDB();
   const { pet, country } = params;
-  console.log(params);
 
   try {
     const allProperties = await Property.find({});

@@ -106,17 +106,14 @@ const PropertySidebar = ({
       });
     });
     const summarizedDays = summarizeDaysBooked(datesArr);
-    console.log(datesArr);
-    console.log(summarizedDays);
+
     const datesDisabled = summarizedDays
       .filter((el: DayBookedDetails) => {
-        console.log(el);
         if (clickedPet.capacity - el.petsNumber < bookingPetCount) {
           return el.day;
         }
       })
       .map((el: any) => el.day);
-    console.log(datesDisabled);
     return datesDisabled;
   }, [bookings, clickedPet, bookingPetCount]);
 
@@ -226,7 +223,6 @@ const PropertySidebar = ({
                 endDate: value.selection.endDate,
                 key: "selection",
               });
-              console.log(value);
             }
           }}
         />

@@ -1,7 +1,6 @@
 "use client";
 
 import { PropertyType } from "@/types";
-import PropertiesMap from "./map/PropertiesMap";
 import { useEffect, useState } from "react";
 import { pets, PetViewProps } from "@/utils/petsAccepted";
 import Image from "next/image";
@@ -13,6 +12,11 @@ import {
   MdOutlineFilterAlt,
   MdOutlineLocationOn,
 } from "react-icons/md";
+import dynamic from "next/dynamic";
+
+const PropertiesMap = dynamic(() => import("./map/PropertiesMap"), {
+  ssr: false,
+});
 
 type QueryParams = {
   pet?: string | string[];
@@ -37,7 +41,6 @@ const PropertiesSidebar = ({ properties }: PropertiesSidebarProps) => {
 
   useEffect(() => {
     let currentQuery: QueryParams = {};
-    console.log(acceptedPets);
 
     if (params) {
       currentQuery = qs.parse(params.toString()) as QueryParams;

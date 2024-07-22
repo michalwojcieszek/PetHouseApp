@@ -6,7 +6,6 @@ import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import "leaflet/dist/leaflet.css";
-import { CountryType } from "../addProperty/SelectCountry";
 import FlagImg from "../FlagImg";
 import { PropertyType } from "@/types";
 import { useRouter } from "next/navigation";
