@@ -2,7 +2,7 @@
 
 import useLogin from "@/hooks/useLogin";
 import Box from "./Box";
-import Input from "../Input";
+import Input from "../ui/Input";
 import useRegister from "@/hooks/useRegister";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";

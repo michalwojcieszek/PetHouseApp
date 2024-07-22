@@ -26,6 +26,7 @@ const SelectCountry = ({ value, onChange, disabled }: SelectCountryProps) => {
       onChange={(value) => {
         onChange(value as CountryType);
       }}
+      aria-labelledby={`${value}-label`}
       value={value}
       getOptionLabel={(option: any) => option.name}
       formatOptionLabel={(option: any) => (

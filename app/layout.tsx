@@ -10,7 +10,7 @@ import getUser from "./actions/getAuthUser";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "PetHouse",
+  title: "PetHouse | House for your",
   description: "Find accommodation for your pet!",
 };
 

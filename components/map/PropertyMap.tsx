@@ -7,7 +7,7 @@ import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import "leaflet/dist/leaflet.css";
 import { CountryType } from "../addProperty/SelectCountry";
-import FlagImg from "../FlagImg";
+import FlagImg from "../images/FlagImg";
 
 type PropertyMapProps = {
   cords: {

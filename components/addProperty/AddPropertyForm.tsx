@@ -1,15 +1,15 @@
 "use client";
 
-import Input from "@/components/Input";
+import Input from "@/components/ui/Input";
 import { useMemo, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { pets } from "@/utils/petsAccepted";
 import Image from "next/image";
-import Counter from "@/components/NewPropertyPetsCounter";
-import Header2 from "@/components/Header2";
+import Counter from "@/components/addProperty/NewPropertyPetsCounter";
+import Header2 from "@/components/ui/Header2";
 import AddPropertyLocation from "@/components/addProperty/AddPropertyLocation";
 import SelectImage from "./SelectImage";
-import Button from "../Button";
+import Button from "../ui/Button";
 import FormSection from "./AddPropertySection";
 import { sortPetsArr } from "@/utils/sortPetsArr";
 import { PetType } from "@/types";
@@ -170,7 +170,7 @@ const AddPropertyForm = () => {
                   <span className="text-theme-color">{pet.type}</span>
                   <Image
                     src={pet.icon}
-                    alt={pet.type}
+                    alt={`Icon of a ${pet.type}`}
                     width={100}
                     height={100}
                   />
@@ -191,7 +191,7 @@ const AddPropertyForm = () => {
                       <div className="border-r-[1px] pr-5 h-full">
                         <Image
                           src={pet.icon}
-                          alt={pet.type}
+                          alt={`Icon of a ${pet.type}`}
                           width={50}
                           height={50}
                         />

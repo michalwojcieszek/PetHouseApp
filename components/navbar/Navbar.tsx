@@ -5,7 +5,7 @@ import logo from "@/public/images/logo.png";
 import { useRouter } from "next/navigation";
 import Container from "../Container";
 import { CurrentUserType } from "@/types";
-import UserImg from "../UserImg";
+import UserImg from "../images/UserImg";
 import useMenu from "@/hooks/useMenu";
 import { IoMenuOutline } from "react-icons/io5";
 import LoggedMenu from "./LoggedMenu";

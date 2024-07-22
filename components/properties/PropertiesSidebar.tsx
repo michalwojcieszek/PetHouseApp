@@ -1,10 +1,10 @@
 "use client";
 
 import { PropertyType } from "@/types";
-import { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { pets, PetViewProps } from "@/utils/petsAccepted";
 import Image from "next/image";
-import SelectCountry, { CountryType } from "./addProperty/SelectCountry";
+import SelectCountry, { CountryType } from "../addProperty/SelectCountry";
 import { useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
 import {
@@ -14,7 +14,7 @@ import {
 } from "react-icons/md";
 import dynamic from "next/dynamic";
 
-const PropertiesMap = dynamic(() => import("./map/PropertiesMap"), {
+const PropertiesMap = dynamic(() => import("../map/PropertiesMap"), {
   ssr: false,
 });
 
@@ -99,7 +99,12 @@ const PropertiesSidebar = ({ properties }: PropertiesSidebarProps) => {
               } hover:grayscale-0 hover:opacity-100 transition cursor-pointer`}
             >
               <span className="text-theme-color">{pet.type}</span>
-              <Image src={pet.icon} alt={pet.type} width={100} height={100} />
+              <Image
+                src={pet.icon}
+                alt={`Icon of a ${pet.type}`}
+                width={100}
+                height={100}
+              />
             </li>
           ))}
         </ul>

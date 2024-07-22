@@ -1,7 +1,7 @@
 import getUser from "@/app/actions/getAuthUser";
 import { getUserById } from "@/app/actions/getUserById";
 import ClientProvider from "@/components/ClientProvider";
-import ScreenGrid from "@/components/ScreenGrid";
+import ScreenGrid from "@/components/grids/ScreenGrid";
 import connectDB from "@/config/database";
 import Booking from "@/models/Booking";
 import Property from "@/models/Property";

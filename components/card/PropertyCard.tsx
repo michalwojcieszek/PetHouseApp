@@ -3,14 +3,14 @@
 import { PropertyType } from "@/types";
 import { useRouter } from "next/navigation";
 import PropertyCardPets from "./PropertyCardPets";
-import FlagImg from "../FlagImg";
-import PropertyImg from "../PropertyImg";
-import AddToFavourite from "../AddToFavourite";
+import FlagImg from "../images/FlagImg";
+import PropertyImg from "../images/PropertyImg";
+import AddToFavourite from "../ui/AddToFavourite";
 import React, { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Loader from "../Loader";
-import RemoveButton from "../RemoveButton";
+import RemoveButton from "../ui/RemoveButton";
 import Spinner from "../Spinner";
 
 const PropertyCard = ({
@@ -82,14 +82,14 @@ const PropertyCard = ({
   };
 
   return (
-    <div
+    <li
       className="rounded-md shadow-[0_0px_8px_-0px_rgba(0,0,0,0.07)] cursor-pointer flex lg:flex-row lg:gap-3 flex-col"
       onClick={() => router.push(`/property/${property._id}`)}
     >
       <div className="overflow-hidden lg:w-64 rounded-t-md lg:rounded-l-md lg:rounded-tr-none relative">
         <PropertyImg
           src={property.image}
-          alt={property.name}
+          alt={`Picture of ${property.name}`}
           id={property._id}
         />
         <AddToFavourite
@@ -161,7 +161,7 @@ const PropertyCard = ({
           </div>
         )}
       </div>
-    </div>
+    </li>
   );
 };
 export default PropertyCard;

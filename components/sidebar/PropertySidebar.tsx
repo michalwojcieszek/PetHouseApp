@@ -7,12 +7,17 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { BookingType, CurrentUserType, PetType, PropertyType } from "@/types";
-import Calendar from "@/components/Calendar";
+// import Calendar from "@/components/booking/Calendar";
 import Image from "next/image";
-import BookingPetCounter from "./BookingPetCounter";
-import Header3 from "./Header3";
-import Button from "./Button";
-import Loader from "./Loader";
+import BookingPetCounter from "../booking/BookingPetCounter";
+import Header3 from "../ui/Header3";
+import Button from "../ui/Button";
+import Loader from "../Loader";
+import dynamic from "next/dynamic";
+
+const Calendar = dynamic(() => import("@/components/booking/Calendar"), {
+  ssr: false,
+});
 
 type DayBookedDetails = {
   day: Date;
@@ -189,7 +194,12 @@ const PropertySidebar = ({
               } hover:grayscale-0 hover:opacity-100 transition cursor-pointer`}
             >
               <span className="text-theme-color">{pet.type}</span>
-              <Image src={pet.icon} alt={pet.type} width={100} height={100} />
+              <Image
+                src={pet.icon}
+                alt={`Icon of a ${pet.type}`}
+                width={100}
+                height={100}
+              />
             </li>
           ))}
         </ul>

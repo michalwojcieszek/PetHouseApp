@@ -1,7 +1,7 @@
 "use client";
 
 import { PropertyType } from "@/types";
-import SelectedProperty from "./SelectedProperty";
+import SelectedProperty from "../property/SelectedProperty";
 
 type SelectedPropertiesGridProps = {
   favouriteProperties?: PropertyType[];

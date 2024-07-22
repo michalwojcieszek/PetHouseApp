@@ -10,6 +10,7 @@ const nextConfig = {
       "example.com",
       "flagsapi.com",
       "res.cloudinary.com",
+      "http://localhost:3000/",
     ],
   },
 };

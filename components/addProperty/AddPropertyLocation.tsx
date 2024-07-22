@@ -1,7 +1,7 @@
 "use client";
 
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
-import Input from "../Input";
+import Input from "../ui/Input";
 import { SetStateAction, useEffect, useState } from "react";
 import { IoMapOutline } from "react-icons/io5";
 import SelectCountry, { CountryType } from "./SelectCountry";

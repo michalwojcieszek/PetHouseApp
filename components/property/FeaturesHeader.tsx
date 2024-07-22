@@ -1,6 +1,6 @@
 "use client";
 
-import Header3 from "../Header3";
+import Header3 from "../ui/Header3";
 
 type FeaturesHeaderProps = {
   children: string;

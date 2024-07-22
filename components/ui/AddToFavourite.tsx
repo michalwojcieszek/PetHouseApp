@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
 
 type AddToFavouriteProps = {
   currentPropertyId: string;

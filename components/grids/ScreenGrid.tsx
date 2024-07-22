@@ -1,10 +1,10 @@
 "use client";
 
 import { BookingType, CurrentUserType, PropertyType, UserType } from "@/types";
-import SingleProperty from "./property/SingleProperty";
+import SingleProperty from "../property/SingleProperty";
 import PropertiesGrid from "./PropertiesGrid";
-import PropertySidebar from "./PropertySidebar";
-import PropertiesSidebar from "./PropertiesSidebar";
+import PropertySidebar from "../sidebar/PropertySidebar";
+import PropertiesSidebar from "../properties/PropertiesSidebar";
 import { IoIosArrowDown } from "react-icons/io";
 import { useState } from "react";
 

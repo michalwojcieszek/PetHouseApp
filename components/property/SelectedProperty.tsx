@@ -1,8 +1,8 @@
 "use client";
 
 import { PropertyType } from "@/types";
-import PropertyImg from "./PropertyImg";
-import PetsInfo from "./property/PetsInfo";
+import PropertyImg from "../images/PropertyImg";
+import PetsInfo from "./PetsInfo";
 
 type SelectedPropertyProps = {
   property: PropertyType;
@@ -16,7 +16,7 @@ const SelectedProperty = ({ property }: SelectedPropertyProps) => {
       <div className="rounded-md overflow-hidden w-32">
         <PropertyImg
           src={property.image}
-          alt={property.name}
+          alt={`Image of ${property.name}`}
           id={property._id}
         />
       </div>

@@ -13,11 +13,14 @@ const PropertyImg = ({ src, alt }: PropertyImgProps) => {
     <div className="overflow-hidden">
       <Image
         src={src}
-        alt={alt}
+        alt={`Picture of ${alt}`}
         width={0}
         height={0}
         sizes="100vw"
         className="w-full hover:scale-110 transition"
+        loading="lazy"
+        placeholder="blur"
+        blurDataURL={src}
       />
     </div>
   );

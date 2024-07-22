@@ -3,15 +3,15 @@
 import { PropertyType, UserType } from "@/types";
 import { useMemo } from "react";
 import dynamic from "next/dynamic";
-import FlagImg from "../FlagImg";
-import Header2 from "../Header2";
+import FlagImg from "../images/FlagImg";
+import Header2 from "../ui/Header2";
 import FeaturesHeader from "./FeaturesHeader";
-import UserImg from "../UserImg";
+import UserImg from "../images/UserImg";
 import { useRouter } from "next/navigation";
 import FeaturesFlexCol from "./FeaturesFlexCol";
 import PetsInfo from "./PetsInfo";
-import PropertyImg from "../PropertyImg";
-import AddToFavourite from "../AddToFavourite";
+import PropertyImg from "../images/PropertyImg";
+import AddToFavourite from "../ui/AddToFavourite";
 
 type SinglePropertyProps = {
   property: PropertyType;
@@ -50,7 +50,7 @@ const SingleProperty = ({
         <div className="relative overflow-hidden rounded-md w-full md:w-96">
           <PropertyImg
             src={property.image}
-            alt={property.name}
+            alt={`Picture of ${property.name} property`}
             id={property._id}
           />
           <AddToFavourite
@@ -61,10 +61,7 @@ const SingleProperty = ({
         <div className="flex flex-col gap-5">
           <FeaturesFlexCol>
             <FeaturesHeader>Owner of the property</FeaturesHeader>
-            <div
-              className="flex gap-3 items-center cursor-pointer"
-              onClick={() => router.push(`owners/${property._id}`)}
-            >
+            <div className="flex gap-3 items-center">
               <UserImg />
               <div>{ownerUser.name}</div>
             </div>

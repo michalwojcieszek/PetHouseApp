@@ -1,7 +1,7 @@
 "use client";
 
 import { IoCloseCircleOutline, IoLogoGoogle } from "react-icons/io5";
-import Button from "../Button";
+import Button from "../ui/Button";
 import { FormEvent, ReactNode } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
