@@ -1,9 +1,14 @@
 "use client";
 
 import { PropertyType } from "@/types";
-import PropertyCard from "../card/PropertyCard";
+// import PropertyCard from "../card/PropertyCard";
 import { format } from "date-fns";
 import NotFound from "../NotFound";
+import dynamic from "next/dynamic";
+
+const PropertyCard = dynamic(() => import("../card/PropertyCard"), {
+  ssr: false,
+});
 
 const additionalInfoHTML = (booking: any) => {
   return (

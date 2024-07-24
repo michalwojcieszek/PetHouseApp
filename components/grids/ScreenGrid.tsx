@@ -1,12 +1,29 @@
 "use client";
 
 import { BookingType, CurrentUserType, PropertyType, UserType } from "@/types";
-import SingleProperty from "../property/SingleProperty";
-import PropertiesGrid from "./PropertiesGrid";
-import PropertySidebar from "../sidebar/PropertySidebar";
-import PropertiesSidebar from "../properties/PropertiesSidebar";
+// import SingleProperty from "../property/SingleProperty";
+// import PropertiesGrid from "./PropertiesGrid";
+// import PropertySidebar from "../sidebar/PropertySidebar";
+// import PropertiesSidebar from "../properties/PropertiesSidebar";
 import { IoIosArrowDown } from "react-icons/io";
 import { useState } from "react";
+import dynamic from "next/dynamic";
+
+const SingleProperty = dynamic(() => import("../property/SingleProperty"), {
+  ssr: false,
+});
+const PropertiesGrid = dynamic(() => import("./PropertiesGrid"), {
+  ssr: false,
+});
+const PropertySidebar = dynamic(() => import("../sidebar/PropertySidebar"), {
+  ssr: false,
+});
+const PropertiesSidebar = dynamic(
+  () => import("../properties/PropertiesSidebar"),
+  {
+    ssr: false,
+  }
+);
 
 type ScreenGridProps = {
   propertiesHeader?: string;
@@ -32,10 +49,10 @@ const ScreenGrid = ({
   const [isMobileSidebarWrapped, setIsMobileSidebarWrapped] = useState(true);
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-30/70 lg:gap-2 h-screen">
+    <div className="flex flex-col xl:flex-row h-screen overflow-hidden">
       {/* SIDEBAR */}
       <div
-        className="xl:hidden border-[1px] rounded-md p-4 flex justify-between items-center cursor-pointer"
+        className="xl:hidden border-[1px] rounded-md p-4 flex justify-between items-center cursor-pointer mt-4"
         onClick={() => setIsMobileSidebarWrapped((is) => !is)}
       >
         <p>Filter and use the map!</p>
@@ -48,10 +65,12 @@ const ScreenGrid = ({
         />
       </div>
       <div
-        className={`${isMobileSidebarWrapped ? "hidden" : "block"} xl:block`}
+        className={`${
+          isMobileSidebarWrapped ? "hidden" : "block"
+        } xl:block flex-none xl:w-1/3 2xl:w-1/4 max-h-[90vh] xl:overflow-y-auto`}
       >
         <div className={property ? `row-start-2 xl:row-start-1` : ""}>
-          <div className="xl:pr-6 2xl:pr-10 flex flex-col gap-5 py-4">
+          <div className="xl:pr-6 2xl:pr-10 flex flex-col gap-5 pt-4">
             <h2 className="text-2xl font-semibold">{sidebarHeader}</h2>
             {type === "properties" && properties && (
               <PropertiesSidebar properties={properties} />
@@ -67,8 +86,8 @@ const ScreenGrid = ({
         </div>
       </div>
       {/* MAIN CONTENT */}
-      <div className="xl:px-6 2xl:px-10 xl:border-l-[1px] xl:overflow-y-auto h-full">
-        <div className="flex flex-col gap-3 py-4 ">
+      <div className="flex-1 xl:overflow-y-auto h-full xl:border-l-[1px]">
+        <div className="flex flex-col gap-3 py-4 xl:px-6 2xl:px-10">
           {type === "properties" && propertiesHeader && (
             <PropertiesGrid
               properties={properties}
@@ -88,4 +107,5 @@ const ScreenGrid = ({
     </div>
   );
 };
+
 export default ScreenGrid;

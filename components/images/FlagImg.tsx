@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 type FlagImgProps = {
@@ -8,10 +10,12 @@ type FlagImgProps = {
 const FlagImg = ({ code, name }: FlagImgProps) => {
   return (
     <Image
-      src={`https://flagsapi.com/${code}/flat/64.png`}
+      src={`https://flagsapi.com/${code}/flat/32.png`}
       alt={`Flag of ${name}`}
       width={30}
       height={30}
+      priority={false}
+      // loading="lazy"
     />
   );
 };

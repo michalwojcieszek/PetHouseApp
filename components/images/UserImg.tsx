@@ -1,3 +1,5 @@
+"use client";
+
 import { CurrentUserType } from "@/types";
 import Image from "next/image";
 import placeholder from "@/public/images/placeholder.jpg";
@@ -11,9 +13,10 @@ const UserImg = ({ currentUser }: UserImgProps) => {
     <Image
       src={currentUser?.image || placeholder}
       alt="PetHouse logo"
-      width="25"
-      height="25"
+      width={25}
+      height={25}
       className="rounded-full"
+      priority
     />
   );
 };

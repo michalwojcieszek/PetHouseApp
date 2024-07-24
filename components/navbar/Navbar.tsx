@@ -1,15 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import logo from "@/public/images/logo.png";
+import logo from "@/public/images/logo.webp";
 import { useRouter } from "next/navigation";
 import Container from "../Container";
 import { CurrentUserType } from "@/types";
 import UserImg from "../images/UserImg";
 import useMenu from "@/hooks/useMenu";
 import { IoMenuOutline } from "react-icons/io5";
-import LoggedMenu from "./LoggedMenu";
-import NotLoggedMenu from "./NotLoggedMenu";
+// import LoggedMenu from "./LoggedMenu";
+// import NotLoggedMenu from "./NotLoggedMenu";
+import dynamic from "next/dynamic";
+
+const LoggedMenu = dynamic(() => import("./LoggedMenu"), {
+  ssr: false,
+});
+const NotLoggedMenu = dynamic(() => import("./NotLoggedMenu"), {
+  ssr: false,
+});
 
 const Navbar = ({ currentUser }: { currentUser: CurrentUserType }) => {
   const {
@@ -38,7 +46,16 @@ const Navbar = ({ currentUser }: { currentUser: CurrentUserType }) => {
       <Container>
         <div className="flex flex-row items-center justify-between gap-2">
           <div className="cursor-pointer" onClick={() => router.push("/")}>
-            <Image src={logo} alt="PetHouse logo" width={200} height={100} />
+            <Image
+              src={logo}
+              alt="PetHouse logo"
+              width={200}
+              height={100}
+              // placeholder="blur"
+              // blurDataURL={"/images/logo.png"}
+              // loading="eager"
+              priority
+            />
           </div>
           <div
             className="flex flex-row items-center justify-between gap-1 md:gap-2 text-4xl text-grey-main bg-white p-2 rounded-md cursor-pointer"

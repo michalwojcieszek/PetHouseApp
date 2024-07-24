@@ -1,4 +1,4 @@
-import Navbar from "@/components/navbar/Navbar";
+// import Navbar from "@/components/navbar/Navbar";
 import { Nunito } from "next/font/google";
 import "./globals.css";
 import RegisterBox from "@/components/box/RegisterBox";
@@ -8,9 +8,14 @@ import Container from "@/components/Container";
 import ToasterProvider from "@/providers/ToastProvider";
 import getUser from "./actions/getAuthUser";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
+
+const Navbar = dynamic(() => import("@/components/navbar/Navbar"), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
-  title: "PetHouse | House for your",
+  title: "PetHouse | House for your pet!",
   description: "Find accommodation for your pet!",
 };
 
@@ -27,14 +32,14 @@ const MainLayout = async ({ children }: MainLayoutProps) => {
     <html lang="en">
       <head>
         <link rel="icon" href="/images/favicon.png" />
+        <link rel="preload" href="@/public/images/logo.webp" as="image" />
       </head>
-      <body className={font.className}>
+      <body className={`${font.className} overflow-y-hidden`}>
+        {/* <div className="pb-2 pt-4 xl:pt-8"> */}
         <ClientProvider>
           <ToasterProvider />
           <Navbar currentUser={currentUser} />
-          <div className="pb-2 pt-4 xl:pt-8">
-            <Container>{children}</Container>
-          </div>
+          <Container>{children}</Container>
           <RegisterBox />
           <LoginBox />
         </ClientProvider>

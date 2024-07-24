@@ -1,10 +1,11 @@
-import connectDB from "@/config/database";
-import Property from "@/models/Property";
 import ClientProvider from "@/components/ClientProvider";
-import ScreenGrid from "@/components/grids/ScreenGrid";
 import getUser from "./actions/getAuthUser";
-import { getUserById } from "./actions/getUserById";
 import getProperties, { IPropertiesParams } from "./actions/getProperties";
+import dynamic from "next/dynamic";
+
+const ScreenGrid = dynamic(() => import("@/components/grids/ScreenGrid"), {
+  ssr: false,
+});
 
 type HomePageParams = {
   searchParams: IPropertiesParams;

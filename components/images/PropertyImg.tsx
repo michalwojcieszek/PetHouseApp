@@ -14,13 +14,16 @@ const PropertyImg = ({ src, alt }: PropertyImgProps) => {
       <Image
         src={src}
         alt={`Picture of ${alt}`}
-        width={0}
-        height={0}
+        width={500}
+        height={500}
         sizes="100vw"
         className="w-full hover:scale-110 transition"
-        loading="lazy"
-        placeholder="blur"
-        blurDataURL={src}
+        // loading="lazy"
+        priority
+        // fetchPriority="high"
+        // // loading="lazy"
+        // placeholder="blur"
+        // blurDataURL={src}
       />
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { PropertyType } from "@/types";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { pets, PetViewProps } from "@/utils/petsAccepted";
 import Image from "next/image";
 import SelectCountry, { CountryType } from "../addProperty/SelectCountry";

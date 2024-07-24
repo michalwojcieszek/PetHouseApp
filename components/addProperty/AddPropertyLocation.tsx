@@ -93,16 +93,6 @@ const AddPropertyLocation = ({
         value={state}
         onChange={(value: any) => setCustomValue("state", value)}
       />
-      {/* <Input
-        id="state"
-        type="text"
-        label="State"
-        register={register}
-        errors={errors}
-        validation={{ required: "State is required" }}
-        disabled={isLoading}
-        value={state}
-      /> */}
       <div>
         {street && zipcode && city && state && !isMapLoading && cords ? (
           <Map
