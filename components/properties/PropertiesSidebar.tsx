@@ -133,7 +133,9 @@ const PropertiesSidebar = ({ properties }: PropertiesSidebarProps) => {
           <MdOutlineLocationOn />
           <h3 className="text-lg font-semibold">Find property on the map</h3>
         </div>
-        <PropertiesMap properties={properties} />
+        <div>
+          <PropertiesMap properties={properties} />
+        </div>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 
 import { IoCloseCircleOutline, IoLogoGoogle } from "react-icons/io5";
 import Button from "../ui/Button";
-import { FormEvent, ReactNode } from "react";
+import { FormEvent, ReactNode, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -21,9 +21,9 @@ type BoxProps = {
 };
 
 const googleAuthCode = (
-  <div className="flex flex-row gap-3 justify-center">
+  <div className="flex flex-row gap-3 justify-center items-center">
     <IoLogoGoogle />
-    <span>Authorize with Google</span>
+    <span className="text-sm md:text-base">Authorize with Google</span>
   </div>
 );
 
@@ -40,8 +40,15 @@ const Box = ({
   onSubmit,
   isLoading,
 }: BoxProps) => {
-  const router = useRouter();
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
+  }, [isOpen]);
+
+  if (!isOpen) {
+    return null;
+  }
 
   const handleCloseBox = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -69,19 +76,19 @@ const Box = ({
 
   return (
     <div
-      className="flex items-center justify-center bg-neutral-800/70 absolute width-100 inset-0"
+      className="flex items-center justify-center bg-neutral-800/70 absolute width-100 inset-0 h-screen overflow-hidden"
       onClick={handleCloseBox}
     >
-      <div className="relative bg-white w-3/4 lg:w-1/2 xl:w-1/3 rounded-md">
+      <div className="relative bg-white w-11/12 lg:w-1/2 xl:w-1/3 rounded-md">
         <div className="border-b-[1px]">
-          <div className="py-5 px-10 relative flex flex-row items-center justify-between">
+          <div className="py-5 px-6 md:px-10 relative flex flex-row items-center justify-between">
             <h1 className="font-semibold text-2xl">{title}</h1>
             <div className="text-3xl  cursor-pointer" onClick={() => close()}>
               <IoCloseCircleOutline />
             </div>
           </div>
         </div>
-        <div className="py-5 px-10">
+        <div className="py-5 px-6 md:px-10">
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-1">

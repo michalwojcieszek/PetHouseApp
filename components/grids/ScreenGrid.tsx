@@ -53,10 +53,11 @@ const ScreenGrid = ({
       <div className="flex flex-col xl:flex-row xl:h-screen xl:overflow-hidden">
         {/* SIDEBAR */}
         <div
-          className="xl:hidden border-[1px] rounded-md p-4 flex justify-between items-center cursor-pointer my-4"
+          className="xl:hidden border-[1px] rounded-md p-4 flex justify-between items-center cursor-pointer my-4 mb-8"
           onClick={() => setIsMobileSidebarWrapped((is) => !is)}
         >
-          <p>Filter and use the map!</p>
+          {type === "properties" && <p>Filter and use the map!</p>}
+          {type === "property" && <p>Book the property!</p>}
           <IoIosArrowDown
             className={
               !isMobileSidebarWrapped
@@ -71,7 +72,7 @@ const ScreenGrid = ({
           } xl:block flex-none xl:w-1/3 2xl:w-1/4 max-h-[90vh] xl:overflow-y-auto mb-8`}
         >
           <div className={property ? `row-start-2 xl:row-start-1` : ""}>
-            <div className="xl:pr-6 2xl:pr-10 flex flex-col gap-5">
+            <div className="xl:pr-6 2xl:pr-10 flex flex-col gap-5 ">
               <h2 className="text-2xl font-semibold">{sidebarHeader}</h2>
               {type === "properties" && properties && (
                 <PropertiesSidebar properties={properties} />
@@ -87,8 +88,8 @@ const ScreenGrid = ({
           </div>
         </div>
         {/* MAIN CONTENT */}
-        <div className="flex-1 xl:overflow-y-auto h-full">
-          <div className="flex flex-col gap-3 xl:px-6 2xl:px-10 mb-32 xl:border-l-[1px]">
+        <div className="flex-1 xl:overflow-y-auto xl:h-full">
+          <div className="flex flex-col gap-3 xl:px-6 2xl:px-10 xl:mb-32 xl:border-l-[1px]">
             <div className="">
               {type === "properties" && propertiesHeader && (
                 <PropertiesGrid

@@ -7,6 +7,7 @@
 .leaflet-pane,
 .leaflet-top {
   z-index: 0 !important;
+  position: static;
 }
 
 .leaflet-popup-content-wrapper,

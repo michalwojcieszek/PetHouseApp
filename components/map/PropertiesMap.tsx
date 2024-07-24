@@ -27,7 +27,7 @@ const PropertiesMap = ({ properties }: PropertiesMapProps) => {
       center={[44, 46]}
       zoom={2}
       scrollWheelZoom={false}
-      className="rounded-md h-96"
+      className="rounded-md h-[35vh]"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
