@@ -51,7 +51,7 @@ const PropertiesGrid = ({
   type,
 }: PropertiesGridType) => {
   return (
-    <div>
+    <div className="mb-5">
       <div className="flex flex-col gap-2 mb-2">
         <h2 className="text-2xl font-semibold">{propertiesHeader}</h2>
         <h3>{propertiesSecondaryHeader}</h3>
