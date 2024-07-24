@@ -1,7 +1,7 @@
 "use client";
 
 import { PropertyType } from "@/types";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { pets, PetViewProps } from "@/utils/petsAccepted";
 import Image from "next/image";
 import SelectCountry, { CountryType } from "../addProperty/SelectCountry";
@@ -14,7 +14,7 @@ import {
 } from "react-icons/md";
 import PropertiesMap from "../map/PropertiesMap";
 import ClientProvider from "../ClientProvider";
-// import dynamic from "next/dynamic";
+import { countriesFormatted } from "@/utils/countries";
 
 type QueryParams = {
   pet?: string | string[];
@@ -30,30 +30,48 @@ const PropertiesSidebar = ({ properties }: PropertiesSidebarProps) => {
   const params = useSearchParams();
 
   const [acceptedPets, setAcceptedPets] = useState<string[]>([]);
-  const [selectedCountry, setSelectedCountry] = useState<CountryType>();
+  const [selectedCountry, setSelectedCountry] = useState<null | CountryType>();
 
   const clearFiltersHandler = () => {
     setAcceptedPets([]);
-    setSelectedCountry(undefined);
+    setSelectedCountry(null);
+    const url = qs.stringifyUrl(
+      {
+        url: "/",
+        query: {},
+      },
+      { skipNull: true }
+    );
+    router.push(url);
   };
 
   useEffect(() => {
-    let currentQuery: QueryParams = {};
+    let currentQuery = qs.parse(params.toString()) as QueryParams;
 
-    if (params) {
-      currentQuery = qs.parse(params.toString()) as QueryParams;
+    if (currentQuery.pet) {
+      setAcceptedPets(
+        Array.isArray(currentQuery.pet) ? currentQuery.pet : [currentQuery.pet]
+      );
     }
+
+    if (currentQuery.country) {
+      setSelectedCountry(
+        countriesFormatted.find(
+          (country) => currentQuery.country === country.code
+        )
+      );
+    }
+  }, [params]);
+
+  useEffect(() => {
+    const currentQuery: QueryParams = {};
 
     if (acceptedPets.length > 0) {
       currentQuery.pet = acceptedPets;
-    } else {
-      delete currentQuery.pet;
     }
 
     if (selectedCountry) {
       currentQuery.country = selectedCountry.code;
-    } else {
-      delete currentQuery.country;
     }
 
     const url = qs.stringifyUrl(
@@ -65,17 +83,15 @@ const PropertiesSidebar = ({ properties }: PropertiesSidebarProps) => {
     );
 
     router.push(url);
-  }, [acceptedPets, selectedCountry, router, params]);
+  }, [acceptedPets, selectedCountry, router]);
 
-  const handleClickPet = (pet: PetViewProps) => {
-    if (acceptedPets.includes(pet.type)) {
-      setAcceptedPets((petsArr) =>
-        petsArr.filter((petEl) => petEl !== pet.type)
-      );
-    } else {
-      setAcceptedPets((petsArr) => [...petsArr, pet.type]);
-    }
-  };
+  const handleClickPet = useCallback((pet: PetViewProps) => {
+    setAcceptedPets((petsArr) =>
+      petsArr.includes(pet.type)
+        ? petsArr.filter((petEl) => petEl !== pet.type)
+        : [...petsArr, pet.type]
+    );
+  }, []);
 
   return (
     <div className="flex flex-col gap-4">
@@ -91,10 +107,10 @@ const PropertiesSidebar = ({ properties }: PropertiesSidebarProps) => {
               key={index}
               onClick={() => handleClickPet(pet)}
               className={`w-14 flex flex-col items-center gap-1 ${
-                acceptedPets.length > 0 && acceptedPets.includes(pet.type)
+                acceptedPets.includes(pet.type)
                   ? "grayscale-0 opacity-100"
                   : "grayscale opacity-50"
-              }  transition cursor-pointer`}
+              } transition cursor-pointer`}
             >
               <span className="text-theme-color">{pet.type}</span>
               <Image
@@ -131,15 +147,14 @@ const PropertiesSidebar = ({ properties }: PropertiesSidebarProps) => {
           <MdOutlineLocationOn />
           <h3 className="text-lg font-semibold">Find property on the map</h3>
         </div>
-        {/* <div className="mb-12 xl:mb-0"> */}
         <div>
           <ClientProvider>
             <PropertiesMap properties={properties} />
           </ClientProvider>
         </div>
-        {/* </div> */}
       </div>
     </div>
   );
 };
+
 export default PropertiesSidebar;

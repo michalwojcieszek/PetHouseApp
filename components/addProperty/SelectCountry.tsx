@@ -12,7 +12,7 @@ export type CountryType = {
 };
 
 type SelectCountryProps = {
-  value?: CountryType;
+  value?: CountryType | null;
   onChange: (value: CountryType) => void;
   disabled?: boolean;
 };

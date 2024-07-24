@@ -17,7 +17,6 @@ const PropertyPage = async ({ params }: { params: IParams }) => {
   const propertyNotJSON = await Property.findOne({ _id: id });
   //fixing error 'Only plain objects can be passed to Client Components from Server Components'
   const property = JSON.parse(JSON.stringify(propertyNotJSON));
-  console.log(property.owner);
   const ownerUser = await getUserById(property.owner);
   const currentUser = await getUser();
   const bookingsNotJSON = await Booking.find();

@@ -21,7 +21,6 @@ L.Icon.Default.mergeOptions({
 });
 
 const PropertiesMap = ({ properties }: PropertiesMapProps) => {
-  console.log("new");
   const router = useRouter();
   return (
     <MapContainer
@@ -34,7 +33,7 @@ const PropertiesMap = ({ properties }: PropertiesMapProps) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <div onClick={() => console.log("clicked")}>
+      <div>
         {properties.map((property) => (
           <div key={property._id} onClick={() => console.log("clicked")}>
             <Marker
