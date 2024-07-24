@@ -39,7 +39,7 @@ const PropertyMap = ({
     <MapContainer
       center={[lat, lng]}
       zoom={13}
-      scrollWheelZoom={true}
+      scrollWheelZoom={false}
       className="rounded-md h-96"
     >
       <TileLayer

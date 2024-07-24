@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { signIn } from "next-auth/react";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/utils/authOptions";
 import axios from "axios";
 
 export default function googleHandler() {

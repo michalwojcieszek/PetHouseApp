@@ -1,7 +1,7 @@
 import connectDB from "@/config/database";
 import User from "@/models/User";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/utils/authOptions";
 
 export default async function getUser() {
   try {

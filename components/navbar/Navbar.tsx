@@ -49,12 +49,12 @@ const Navbar = ({ currentUser }: { currentUser: CurrentUserType }) => {
             <Image
               src={logo}
               alt="PetHouse logo"
-              width={200}
+              width={150}
               height={100}
               // placeholder="blur"
               // blurDataURL={"/images/logo.png"}
               // loading="eager"
-              priority
+              // priority
             />
           </div>
           <div

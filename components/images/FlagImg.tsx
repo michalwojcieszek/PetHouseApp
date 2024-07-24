@@ -14,7 +14,7 @@ const FlagImg = ({ code, name }: FlagImgProps) => {
       alt={`Flag of ${name}`}
       width={30}
       height={30}
-      priority={false}
+      // priority={false}
       // loading="lazy"
     />
   );

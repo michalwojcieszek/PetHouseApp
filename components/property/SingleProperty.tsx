@@ -32,7 +32,7 @@ const SingleProperty = ({
       dynamic(() => import("../map/PropertyMap"), {
         ssr: false,
       }),
-    [cords.lat, cords.lng]
+    []
   );
 
   const petsAccepted = property.pets.filter((pet) => pet.accept === true);

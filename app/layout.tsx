@@ -32,9 +32,8 @@ const MainLayout = async ({ children }: MainLayoutProps) => {
     <html lang="en">
       <head>
         <link rel="icon" href="/images/favicon.png" />
-        <link rel="preload" href="@/public/images/logo.webp" as="image" />
       </head>
-      <body className={`${font.className} overflow-y-hidden`}>
+      <body className={`${font.className} xl:overflow-y-hidden`}>
         {/* <div className="pb-2 pt-4 xl:pt-8"> */}
         <ClientProvider>
           <ToasterProvider />

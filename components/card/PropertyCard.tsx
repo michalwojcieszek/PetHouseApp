@@ -9,9 +9,9 @@ import AddToFavourite from "../ui/AddToFavourite";
 import React, { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import Loader from "../Loader";
 import RemoveButton from "../ui/RemoveButton";
 import Spinner from "../Spinner";
+import ClientProvider from "../ClientProvider";
 
 const PropertyCard = ({
   property,
@@ -87,11 +87,13 @@ const PropertyCard = ({
       onClick={() => router.push(`/property/${property._id}`)}
     >
       <div className="overflow-hidden lg:w-64 rounded-t-md lg:rounded-l-md lg:rounded-tr-none relative">
-        <PropertyImg
-          src={property.image}
-          alt={`Picture of ${property.name}`}
-          id={property._id}
-        />
+        <ClientProvider>
+          <PropertyImg
+            src={property.image}
+            alt={`Picture of ${property.name}`}
+            id={property._id}
+          />
+        </ClientProvider>
         <AddToFavourite
           currentPropertyId={property._id}
           currentUserFavourites={currentUserFavourites}

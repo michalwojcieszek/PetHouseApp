@@ -26,7 +26,7 @@ const PropertiesMap = ({ properties }: PropertiesMapProps) => {
     <MapContainer
       center={[44, 46]}
       zoom={2}
-      scrollWheelZoom={true}
+      scrollWheelZoom={false}
       className="rounded-md h-96"
     >
       <TileLayer

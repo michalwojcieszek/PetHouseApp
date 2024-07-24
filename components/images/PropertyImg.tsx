@@ -13,19 +13,17 @@ const PropertyImg = ({ src, alt }: PropertyImgProps) => {
     <div className="overflow-hidden">
       <Image
         src={src}
-        alt={`Picture of ${alt}`}
-        width={500}
-        height={500}
+        alt={alt}
+        width={100}
+        height={100}
         sizes="100vw"
         className="w-full hover:scale-110 transition"
-        // loading="lazy"
-        priority
-        // fetchPriority="high"
-        // // loading="lazy"
+        loading="eager"
+        // priority
         // placeholder="blur"
-        // blurDataURL={src}
       />
     </div>
   );
 };
+
 export default PropertyImg;
