@@ -50,11 +50,15 @@ const Box = ({
     return null;
   }
 
+  const closing = () => {
+    close();
+    document.body.style.overflow = "";
+  };
+
   const handleCloseBox = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     if (e.target === e.currentTarget) {
-      close();
-      document.body.style.overflow = "";
+      closing();
     }
   };
 
@@ -84,7 +88,7 @@ const Box = ({
         <div className="border-b-[1px]">
           <div className="py-5 px-6 md:px-10 relative flex flex-row items-center justify-between">
             <h1 className="font-semibold text-2xl">{title}</h1>
-            <div className="text-3xl  cursor-pointer" onClick={() => close()}>
+            <div className="text-3xl  cursor-pointer" onClick={closing}>
               <IoCloseCircleOutline />
             </div>
           </div>
