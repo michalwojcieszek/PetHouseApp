@@ -54,6 +54,7 @@ const Box = ({
     e.stopPropagation();
     if (e.target === e.currentTarget) {
       close();
+      document.body.style.overflow = "";
     }
   };
 
