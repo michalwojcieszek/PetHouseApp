@@ -53,7 +53,7 @@ const ScreenGrid = ({
       <div className="flex flex-col xl:flex-row xl:h-screen xl:overflow-hidden">
         {/* SIDEBAR */}
         <div
-          className="xl:hidden border-[1px] rounded-md p-4 flex justify-between items-center cursor-pointer my-4 mb-8"
+          className="xl:hidden border-[1px] rounded-md p-4 flex justify-between items-center cursor-pointer my-4"
           onClick={() => setIsMobileSidebarWrapped((is) => !is)}
         >
           {type === "properties" && <p>Filter and use the map!</p>}

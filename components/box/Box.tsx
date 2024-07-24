@@ -99,7 +99,7 @@ const Box = ({
                 </h2>
                 <h3 className="text-md text-grey-secondary">{subtitle}</h3>
               </div>
-              <div className="flex flex-col gap-6">{children}</div>
+              <div className="flex flex-col gap-4">{children}</div>
               <div className="flex flex-col gap-2">
                 <Button
                   label={isLoading ? "Loading..." : buttonLabel}

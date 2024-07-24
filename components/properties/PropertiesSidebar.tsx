@@ -12,11 +12,9 @@ import {
   MdOutlineFilterAlt,
   MdOutlineLocationOn,
 } from "react-icons/md";
-import dynamic from "next/dynamic";
-
-const PropertiesMap = dynamic(() => import("../map/PropertiesMap"), {
-  ssr: false,
-});
+import PropertiesMap from "../map/PropertiesMap";
+import ClientProvider from "../ClientProvider";
+// import dynamic from "next/dynamic";
 
 type QueryParams = {
   pet?: string | string[];
@@ -96,7 +94,7 @@ const PropertiesSidebar = ({ properties }: PropertiesSidebarProps) => {
                 acceptedPets.length > 0 && acceptedPets.includes(pet.type)
                   ? "grayscale-0 opacity-100"
                   : "grayscale opacity-50"
-              } hover:grayscale-0 hover:opacity-100 transition cursor-pointer`}
+              }  transition cursor-pointer`}
             >
               <span className="text-theme-color">{pet.type}</span>
               <Image
@@ -135,7 +133,9 @@ const PropertiesSidebar = ({ properties }: PropertiesSidebarProps) => {
         </div>
         {/* <div className="mb-12 xl:mb-0"> */}
         <div>
-          <PropertiesMap properties={properties} />
+          <ClientProvider>
+            <PropertiesMap properties={properties} />
+          </ClientProvider>
         </div>
         {/* </div> */}
       </div>

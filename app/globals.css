@@ -15,6 +15,10 @@
   font-family: "Nunito", sans-serif;
 }
 
+.leaflet-marker-icon {
+  pointer-events: auto;
+}
+
 body {
   color: #495057;
 }
