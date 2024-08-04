@@ -16,15 +16,17 @@ const HomePage = async ({ searchParams }: HomePageParams) => {
   const properties = await getProperties(searchParams);
 
   return (
-    <ClientProvider>
-      <ScreenGrid
-        sidebarHeader="Help your search!"
-        propertiesHeader="Properties available:"
-        properties={properties}
-        currentUser={currentUser}
-        type="properties"
-      />
-    </ClientProvider>
+    <div className="xl:overflow-y-hidden">
+      <ClientProvider>
+        <ScreenGrid
+          sidebarHeader="Help your search!"
+          propertiesHeader="Properties available:"
+          properties={properties}
+          currentUser={currentUser}
+          type="properties"
+        />
+      </ClientProvider>
+    </div>
   );
 };
 export default HomePage;

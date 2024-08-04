@@ -125,7 +125,7 @@ const AddPropertyForm = () => {
   };
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="mt-6 flex flex-col gap-5">
       <h1 className="text-xl font-bold">Add a new property</h1>
       <hr />
       <form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}>

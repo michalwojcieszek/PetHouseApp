@@ -33,7 +33,7 @@ const MainLayout = async ({ children }: MainLayoutProps) => {
       <head>
         <link rel="icon" href="/images/favicon.png" />
       </head>
-      <body className={`${font.className} xl:overflow-y-hidden`}>
+      <body className={`${font.className}`}>
         {/* <div className="pb-2 pt-4 xl:pt-8"> */}
         <ClientProvider>
           <ToasterProvider />

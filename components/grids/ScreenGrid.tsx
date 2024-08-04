@@ -89,7 +89,7 @@ const ScreenGrid = ({
         </div>
         {/* MAIN CONTENT */}
         <div className="flex-1 xl:overflow-y-auto xl:h-full">
-          <div className="flex flex-col gap-3 xl:px-6 2xl:px-10 xl:mb-32 xl:border-l-[1px]">
+          <div className="flex flex-col gap-3 xl:px-6 2xl:px-10 xl:mb-8 xl:border-l-[1px]">
             <div className="">
               {type === "properties" && propertiesHeader && (
                 <PropertiesGrid
