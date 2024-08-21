@@ -187,6 +187,13 @@ const PropertySidebar = ({
               onClick={() => {
                 handleClickPet(pet);
               }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  handleClickPet(pet);
+                }
+              }}
+              role="button"
+              tabIndex={0}
               className={`w-14 flex flex-col items-center gap-1 ${
                 clickedPet === pet
                   ? "grayscale-0 opacity-100"

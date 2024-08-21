@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import Spinner from "../Spinner";
@@ -29,7 +29,9 @@ const AddToFavourite = ({
     }
   }, [currentUserFavourites, currentPropertyId]);
 
-  const handleToggle = async (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleToggle = async (
+    e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent
+  ) => {
     e.stopPropagation();
     try {
       setIsLoading(true);
@@ -53,6 +55,13 @@ const AddToFavourite = ({
         <div
           className="bg-white hover:text-red-600 transition p-1 rounded-full cursor-pointer "
           onClick={handleToggle}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              handleToggle(e);
+            }
+          }}
+          role="button"
+          tabIndex={0}
         >
           {isClicked ? <FaHeart className="text-red-600" /> : <FaRegHeart />}
         </div>

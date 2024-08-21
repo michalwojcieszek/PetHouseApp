@@ -45,7 +45,18 @@ const Navbar = ({ currentUser }: { currentUser: CurrentUserType }) => {
     <div className="py-3 bg-theme-color">
       <Container>
         <div className="flex flex-row items-center justify-between gap-2">
-          <div className="cursor-pointer" onClick={() => router.push("/")}>
+          <div
+            className="cursor-pointer"
+            role="button"
+            tabIndex={0}
+            onClick={() => router.push("/")}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                router.push("/");
+              }
+            }}
+          >
             <Image
               src={logo}
               alt="PetHouse logo"
@@ -62,6 +73,14 @@ const Navbar = ({ currentUser }: { currentUser: CurrentUserType }) => {
             onClick={() =>
               handleToggle(isDropdownOpen, openDropdown, closeDropdown)
             }
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleToggle(isDropdownOpen, openDropdown, closeDropdown);
+              }
+            }}
           >
             <div>
               <UserImg currentUser={currentUser} />

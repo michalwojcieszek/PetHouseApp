@@ -72,7 +72,7 @@ const ScreenGrid = ({
           } xl:block flex-none xl:w-1/3 2xl:w-1/4 max-h-[90vh] xl:overflow-y-auto mb-8`}
         >
           <div className={property ? `row-start-2 xl:row-start-1` : ""}>
-            <div className="xl:pr-6 2xl:pr-10 flex flex-col gap-5 ">
+            <div className="xl:pl-2 2xl:pl-3 xl:pr-6 2xl:pr-10 flex flex-col gap-5 ">
               <h2 className="text-2xl font-semibold">{sidebarHeader}</h2>
               {type === "properties" && properties && (
                 <PropertiesSidebar properties={properties} />

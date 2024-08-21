@@ -50,6 +50,7 @@ const AddPropertyLocation = ({
           `https://maps.googleapis.com/maps/api/geocode/json?address=${coordinatesString}&key=${process.env.NEXT_PUBLIC_GOOGLE_GEOCODING_API}`
         );
         const data = await res.json();
+        console.log(data);
         setCords(data.results[0].geometry.location);
         setIsMapLoading(false);
       };

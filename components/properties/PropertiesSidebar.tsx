@@ -106,6 +106,13 @@ const PropertiesSidebar = ({ properties }: PropertiesSidebarProps) => {
             <li
               key={index}
               onClick={() => handleClickPet(pet)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  handleClickPet(pet);
+                }
+              }}
+              role="button"
+              tabIndex={0}
               className={`w-14 flex flex-col items-center gap-1 ${
                 acceptedPets.includes(pet.type)
                   ? "grayscale-0 opacity-100"

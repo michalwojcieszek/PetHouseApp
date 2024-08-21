@@ -22,6 +22,13 @@ const MenuItem = ({
         highlightPrimary ? "bg-green-50 hover:bg-green-100" : ""
       }`}
       onClick={action}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          action();
+        }
+      }}
+      role="button"
+      tabIndex={0}
     >
       {children}
     </li>
